@@ -6,23 +6,26 @@ package kat;
 
 	public class Ksiazka {
 		
-		public String tytul;
-		//public String autor;
-		public String ISBN;
-		public String cena;
-		public String wydawca;
+		private String genre;
 		
-		public Ksiazka(String tytul, String ISBN, String cena, String wydawca)
+		public String title;
+		public String autor;
+		public String ISBN;
+		public String price;
+		public String publisher;
+		
+		public Ksiazka(String tytul, String autor, String ISBN, String cena, String wydawca)
 		{
-			this.tytul=tytul;
-			this.ISBN=ISBN;
-			this.cena=cena;
-			this.wydawca=wydawca;
+			this.title= tytul;
+			this.autor= autor;
+			this.ISBN= ISBN;
+			this.price= cena;
+			this.publisher= wydawca;
 		}
 		
 		public void printBooks()
 		{
-			System.out.println(tytul + " | Cena: " + cena + "PLN" + " | Wydawca: " + wydawca + " | Nr ISBN: " + ISBN);
+			System.out.println(title + " | Cena: " + price + "PLN" + " | Wydawca: " + publisher + " | Nr ISBN: " + ISBN);
 		}
 
 

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name= "Bookstore">
+	
+	<target name ="compile">
+		<mkdir dir="bin" />
+		<javac srcdir="src" destdir="bin" />
+	</target>
+
+	<target name="jar">
+		<mkdir dir ="bin/jar"/>
+		<jar destfile="${jar}/Bookstore.jar" basedir="bin" >
+			<manifest>
+				<attribute name="Main-Class" value="kat.Main" />
+			</manifest>
+		</jar>
+	</target>
+	
+	<target name ="run-jar">
+		<java jar="${jar}/Bookstore.jar" fork="true" />
+	</target>
+</project>
