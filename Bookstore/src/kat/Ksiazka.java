@@ -1,32 +1,47 @@
 package kat;
 
 
-	import java.util.ArrayList;
-	import java.util.List;
+	//import java.util.ArrayList;
+	//import java.util.List;
 
 	public class Ksiazka {
 		
-		private String genre;
+		//private String genre;
 		
-		public String title;
-		public String autor;
-		public String ISBN;
-		public String price;
-		public String publisher;
+		public String tytul;
+		public Integer cena;
+	//	public String autor;
+	//	public String ISBN;
+	//	public String publisher;
 		
-		public Ksiazka(String tytul, String autor, String ISBN, String cena, String wydawca)
+		public Ksiazka(String tytul, Integer cena) //, String autor, String ISBN, String wydawca)
 		{
-			this.title= tytul;
-			this.autor= autor;
-			this.ISBN= ISBN;
-			this.price= cena;
-			this.publisher= wydawca;
+			this.tytul= tytul;
+			this.cena= cena;
+		//	this.autor= autor;
+		//	this.ISBN= ISBN;
+		//	this.publisher= wydawca;
 		}
 		
 		public void printBooks()
 		{
-			System.out.println(title + " | Cena: " + price + "PLN" + " | Wydawca: " + publisher + " | Nr ISBN: " + ISBN);
+			System.out.println(tytul + " | Cena: " + cena + "PLN" );
 		}
 
 
+		public String getTitle() {
+			return tytul;
+		}
+
+		public void setTitle(String tytul) {
+			this.tytul = tytul;
+		}
+
+		public Integer getPrice() {
+			return cena;
+		}
+
+		public void setPrice(Integer cena) {
+			this.cena = cena;
+		}
 	}
