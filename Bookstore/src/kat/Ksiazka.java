@@ -6,7 +6,7 @@ package kat;
 
 	public class Ksiazka {
 		
-		//private String genre;
+	//	private String genre;
 		
 		public String tytul;
 		public Integer cena;
@@ -25,7 +25,7 @@ package kat;
 		
 		public void printBooks()
 		{
-			System.out.println(tytul + " | Cena: " + cena + "PLN" );
+			System.out.println(tytul + "\tCena: " + cena + "PLN" );
 		}
 
 
