@@ -1,5 +1,5 @@
 package kat;
 
 public enum BookGenre {
-	Horror, Romance, Fantasy
+	Horror, Romance, Fantasy, Mistery, Drama
 }
