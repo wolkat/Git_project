@@ -8,16 +8,16 @@ package kat;
 		
 		//private String genre;
 		
-		public String title;
-		public String price;
+		public String tytul;
+		public Integer cena;
 	//	public String autor;
 	//	public String ISBN;
 	//	public String publisher;
 		
-		public Ksiazka(String tytul, String cena) //, String autor, String ISBN, String wydawca)
+		public Ksiazka(String tytul, Integer cena) //, String autor, String ISBN, String wydawca)
 		{
-			this.title= tytul;
-			this.price= cena;
+			this.tytul= tytul;
+			this.cena= cena;
 		//	this.autor= autor;
 		//	this.ISBN= ISBN;
 		//	this.publisher= wydawca;
@@ -25,8 +25,23 @@ package kat;
 		
 		public void printBooks()
 		{
-			System.out.println(title + " | Cena: " + price + "PLN" );
+			System.out.println(tytul + " | Cena: " + cena + "PLN" );
 		}
 
 
+		public String getTitle() {
+			return tytul;
+		}
+
+		public void setTitle(String tytul) {
+			this.tytul = tytul;
+		}
+
+		public Integer getPrice() {
+			return cena;
+		}
+
+		public void setPrice(Integer cena) {
+			this.cena = cena;
+		}
 	}
