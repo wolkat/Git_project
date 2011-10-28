@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name= "Bookstore">
-	
+
 	<target name ="compile">
 		<mkdir dir="bin" />
 		<javac srcdir="src" destdir="bin" />
@@ -14,7 +14,7 @@
 			</manifest>
 		</jar>
 	</target>
-	
+
 	<target name ="run-jar">
 		<java jar="${jar}/Bookstore.jar" fork="true" />
 	</target>

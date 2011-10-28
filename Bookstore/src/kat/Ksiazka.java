@@ -9,12 +9,26 @@ package kat;
 	//	private String genre;
 		
 		public String tytul;
-		public Integer cena;
+	//--	public Integer cena;
 	//	public String autor;
 	//	public String ISBN;
 	//	public String publisher;
 		
-		public Ksiazka(String tytul, Integer cena) //, String autor, String ISBN, String wydawca)
+		private double cena;
+		
+		public void setPrize(double cena) throws MyException
+		{
+			if (cena <0)
+					throw new MyException("cena nie moze byc ujemna");
+			else System.out.println("ok");
+		}
+		
+		public Ksiazka(String tytul)
+		{
+			this.tytul= tytul;
+		}
+		
+		public Ksiazka(String tytul, Double cena) //, String autor, String ISBN, String wydawca)
 		{
 			this.tytul= tytul;
 			this.cena= cena;
@@ -37,7 +51,7 @@ package kat;
 			this.tytul = tytul;
 		}
 
-		public Integer getPrice() {
+		public Double getPrice() {
 			return cena;
 		}
 
