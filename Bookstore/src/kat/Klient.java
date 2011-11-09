@@ -11,63 +11,57 @@ public class Klient {
 	private static Logger logger= Logger.getLogger(Klient.class);
 	
 
-	public String imie;
-	public String nazwisko;
-	List<Ksiazka> listaKsiazek = new ArrayList<Ksiazka>();
-	
-	public Klient(String imie, String nazwisko)
+	public String name;
+	public String surname;
+	List<Book> listaKsiazek = new ArrayList<Book>();
+	 Klient(String imie, String nazwisko)
 	{
-		this.imie = imie;
-		this.nazwisko = nazwisko;
+		this.name = imie;
+		this.surname = nazwisko;
 	}
 	
-	public Klient(String imie, String nazwisko, List<Ksiazka> book)
+	public Klient(String imie, String nazwisko, List<Book> book)
 	{
-		this.imie=imie;
-		this.nazwisko=nazwisko;
+		this.name=imie;
+		this.surname=nazwisko;
 		this.book=book;
 	}
 	
-	public List<Ksiazka> book = new ArrayList<Ksiazka>();
+	public List<Book> book = new ArrayList<Book>();
 	
 	public void printBooks()
 	{
-		for(Ksiazka b : this.book)
+		for(Book b : this.book)
 		{
 			b.printBooks();
 		}
 	}
 
 	public void printClient() {
-		System.out.println("Imie: " + imie + "\tNazwisko: " + nazwisko);
+		System.out.println("Imie: " + name + "\tNazwisko: " + surname);
 		logger.info("print client" );
 	}
 
 	public void printBook() {
-		for (Ksiazka b : listaKsiazek) {
+		for (Book b : listaKsiazek) {
 			b.printBooks();
 		}
 		logger.info("print books" );
 
 	}
 
-	public void addBook(Ksiazka b) {
+	public void addBook(Book b) {
 		listaKsiazek.add(b);
 		logger.info("added new book \"" +b.tytul+"\"" );
 	}
 
-	public void removeBook(String tytul) {
-		int pozycja = 0;
-		for (Ksiazka book : listaKsiazek) {
-			if (book.getTitle().equals(tytul)) {
-				listaKsiazek.remove(pozycja);
-				break;
-			}
-			pozycja++;
-			logger.info("removed book \"" + tytul+"\"" );
+	public void removeBook(Book book) {
+		
+		listaKsiazek.remove(book);
+			
+			logger.info("removed book \"" + book.getTitle()+"\"" );
 		}
-
-	}
+		
 
 	public void removeBooks() {
 		listaKsiazek.clear();
@@ -76,9 +70,9 @@ public class Klient {
 
 	public void editBook(String tytul, double nowaCena) {
 		int pozycja = 0;
-		for (Ksiazka book : listaKsiazek) {
+		for (Book book : listaKsiazek) {
 			if (book.getTitle().equals(tytul)) {
-				listaKsiazek.set(pozycja, new Ksiazka(tytul, nowaCena));
+				listaKsiazek.set(pozycja, new Book(tytul, nowaCena));
 				break;
 			}
 			pozycja++;
@@ -86,41 +80,51 @@ public class Klient {
 		}
 	}
 
-	public void find(String tytul) {
-		int pozycja = 0;
-		for (Ksiazka book : listaKsiazek) {
+	public Book find(String tytul) {
+		
+		for (Book book : listaKsiazek) {
 			if (book.getTitle().equals(tytul)) {
-				System.out.println("Szukana gra " + book.getTitle()
-						+ " znajduje się na pozycji " + pozycja);
+				return book;
 			}
-			pozycja++;
 			logger.info("found a book \"" + tytul+"\"" );
 		}
+		return null;
+	}
+	
+	public List<Book> findAll(String tytul) {
+		List<Book> results= new ArrayList<Book>();
+		for (Book book : listaKsiazek) {
+			if (book.getTitle().equals(tytul)) {
+				results.add(book);
+			}
+			logger.info("found all books" );
+		}
+		return results;
 	}
 
 	public String getName() {
-		return imie;
+		return name;
 	}
 
 	public void setName(String imie) {
-		this.imie = imie;
+		this.name = imie;
 		logger.info("set client's name" );
 	}
 
 	public String getSurname() {
-		return nazwisko;
+		return surname;
 	}
 
 	public void setSurname(String nazwisko) {
-		this.nazwisko = nazwisko;
+		this.surname = nazwisko;
 		logger.info("set client's surname" );
 	}
 
-	public List<Ksiazka> getBookList() {
+	public List<Book> getBookList() {
 		return listaKsiazek;
 	}
 
-	public void setBookList(List<Ksiazka> bookList) {
+	public void setBookList(List<Book> bookList) {
 		this.listaKsiazek = bookList;
 		logger.info("set booklist" );
 	}
