@@ -33,7 +33,7 @@ public class Main {
 		c.addBook(b);
 		//c.removeBook("Circus");
 		c.addBook(b);
-		c.editBook("Circus", 29.0);
+
 		c.getName();
 		c.find("Place");
 		c.printBooks();

@@ -3,10 +3,8 @@ package kat;
 
 	public class Book {
 		
-	//	private String genre;
-		
+		private String genre;
 		public String title;
-		
 		private double price;
 		
 		public void setPrice(double price) throws PriceBelowZeroException

@@ -13,25 +13,29 @@ public class Client {
 
 	public String name;
 	public String surname;
-	List<Book> bookList = new ArrayList<Book>();
+		
+	public List<Book> bookList = new ArrayList<Book>();
 	 Client(String name, String surname)
 	{
 		this.name = name;
 		this.surname = surname;
 	}
 	
-	public Client(String name, String surname, List<Book> book)
+	public Client(String name, String surname, List<Book> bookList)
 	{
 		this.name=name;
 		this.surname=surname;
-		this.book=book;
+		this.bookList=bookList;
 	}
 	
-	public List<Book> book = new ArrayList<Book>();
+	public String toString()
+	{
+		return name + " has " + bookList.size()+" cars.";
+	}
 	
 	public void printBooks()
 	{
-		for(Book b : this.book)
+		for(Book b : this.bookList)
 		{
 			b.printBooks();
 		}
@@ -68,17 +72,6 @@ public class Client {
 		logger.info("removed all books");
 	}
 
-	public void editBook(String title, double newPrice) {
-		int pozycja = 0;
-		for (Book book : bookList) {
-			if (book.getTitle().equals(title)) {
-				bookList.set(pozycja, new Book(title, newPrice));
-				break;
-			}
-			pozycja++;
-			logger.info("edited a book \"" + title+"\"" );
-		}
-	}
 
 	public Book find(String title) {
 		
