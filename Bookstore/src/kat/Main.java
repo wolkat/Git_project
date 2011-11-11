@@ -13,36 +13,37 @@ public class Main {
 		
 		PropertyConfigurator.configure("Log4J.properties");
 	
-		List<Book> listaKsiazek = new ArrayList<Book>();
-		listaKsiazek.add(new Book("Circus",49.0));
-		Book b = new Book("Place");
-		//book.add(b);
+		List<Book> bookList1 = new ArrayList<Book>();
+		List<Book> bookList2 = new ArrayList<Book>();
 		
+		Book b1 = new Book("The Lunatic Cafe","Laurell K. Hamilton",BookGenre.Horror);
+		Book b2 = new Book("Spellbound","Margit Sandemo");
+		Book b3 = new Book("Achaja","Andrzej Ziemianski");
 		
 		try {
-			b.setPrice(-2.0);
-		} catch (PriceBelowZeroException e) {
-
+			b1.setPrice(-2.0);
+			} catch (PriceBelowZeroException e) {
 			logger.error(e);
-			logger.fatal(e);
-			logger.info(e);
-			logger.warn(e);
 		}
 		
-		Client c = new Client("Jan", "Nowak", listaKsiazek);
-		c.addBook(b);
-		//c.removeBook("Circus");
-		c.addBook(b);
-
-		c.getName();
-		c.find("Place");
-		c.printBooks();
-		c.printClient();
+		Client c1 = new Client("Jan", "Nowak", bookList1);
+		Client c2 = new Client("Julek", "Kowal", bookList2);
+		c1.addBook(b1);
+		c1.addBook(b2);
+		c2.addBook(b3);
+		c1.printClient();
+		System.out.println("Lista ksiazek klienta "+c1.name+" "+c1.surname+":");
+		System.out.println("===========================");
+		c1.printBooks();
+		
+		System.out.println("===========================");
+		
+		c2.printClient();
+		System.out.println("Lista ksiazek klienta "+c2.name+" "+c2.surname+":");
+		System.out.println("===========================");
+		c2.printBooks();
 		
 	}
-
-
-	
 	
 }
 
