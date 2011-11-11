@@ -52,7 +52,7 @@ public class Client {
 
 	public void addBook(Book b) {
 		bookList.add(b);
-		logger.info("added new book \"" +b.tytul+"\"" );
+		logger.info("added new book \"" +b.title+"\"" );
 	}
 
 	public void removeBook(Book book) {

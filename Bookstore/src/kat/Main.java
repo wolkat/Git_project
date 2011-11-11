@@ -20,7 +20,7 @@ public class Main {
 		
 		
 		try {
-			b.setPrize(-2.0);
+			b.setPrice(-2.0);
 		} catch (PriceBelowZeroException e) {
 
 			logger.error(e);

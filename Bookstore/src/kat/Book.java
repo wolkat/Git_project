@@ -1,61 +1,52 @@
 package kat;
 
 
-	//import java.util.ArrayList;
-	//import java.util.List;
-
 	public class Book {
 		
 	//	private String genre;
 		
-		public String tytul;
-	//--	public Integer cena;
-	//	public String autor;
-	//	public String ISBN;
-	//	public String publisher;
+		public String title;
 		
-		private double cena;
+		private double price;
 		
-		public void setPrize(double cena) throws PriceBelowZeroException
+		public void setPrice(double price) throws PriceBelowZeroException
 		{
-			if (cena <0)
+			if (price <0)
 					throw new PriceBelowZeroException("cena nie moze byc ujemna");
 			else System.out.println("ok");
 		}
 		
-		public Book(String tytul)
+		public Book(String title)
 		{
-			this.tytul= tytul;
+			this.title= title;
 		}
 		
-		public Book(String tytul, Double cena) //, String autor, String ISBN, String wydawca)
+		public Book(String title, Double price) 
 		{
-			this.tytul= tytul;
-			this.cena= cena;
-		//	this.autor= autor;
-		//	this.ISBN= ISBN;
-		//	this.publisher= wydawca;
+			this.title= title;
+			this.price= price;
+
 		}
 		
 		public void printBooks()
 		{
-			System.out.println(tytul + "\tCena: " + cena + "PLN" );
+			System.out.println(title + "\tCena: " + price + "PLN" );
 		}
 
 
 		public String getTitle() {
-			return tytul;
+			return title;
 		}
 
-		public void setTitle(String tytul) {
-			this.tytul = tytul;
+		public void setTitle(String title) {
+			this.title = title;
 		}
 
 		public Double getPrice() {
-			return cena;
+			return price;
 		}
 
 		public void setPrice(Integer cena) {
-			this.cena = cena;
+			this.price = cena;
 		}
 	}
