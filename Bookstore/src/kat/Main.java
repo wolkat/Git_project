@@ -35,6 +35,13 @@ public class Main {
 		System.out.println("Lista ksiazek klienta "+c1.name+" "+c1.surname+":");
 		System.out.println("===========================");
 		c1.printBooks();
+		c1.deleteBook(b2);
+		try {
+			b1.setPrice(28.0);
+		} catch (PriceBelowZeroException e) {
+			e.printStackTrace();
+			logger.error("niepoprawna cena"+b1.getTitle());
+		}
 		
 		System.out.println("===========================");
 		

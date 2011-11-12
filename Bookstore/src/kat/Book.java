@@ -52,7 +52,7 @@ package kat;
 			return price;
 		}
 
-		public void setPrice(Integer cena) {
+		public void setPrice(Integer cena) throws PriceBelowZeroException {
 			this.price = cena;
 		}
 	}

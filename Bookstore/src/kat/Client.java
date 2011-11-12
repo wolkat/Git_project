@@ -56,10 +56,10 @@ public class Client {
 
 	public void addBook(Book b) {
 		bookList.add(b);
-		logger.info("added new book \"" +b.title+"\"" );
+		logger.info("added new book \"" +b.title +"\"" );
 	}
 
-	public void removeBook(Book book) {
+	public void deleteBook(Book book) {
 		
 		bookList.remove(book);
 			
@@ -67,9 +67,9 @@ public class Client {
 		}
 		
 
-	public void removeBooks() {
+	public void clearBookList() {
 		bookList.clear();
-		logger.info("removed all books");
+		logger.info("cleared bookList");
 	}
 
 
@@ -101,7 +101,7 @@ public class Client {
 
 	public void setName(String name) {
 		this.name = name;
-		logger.info("set client's name" );
+		logger.info("set client's name" + name);
 	}
 
 	public String getSurname() {
@@ -110,7 +110,7 @@ public class Client {
 
 	public void setSurname(String surname) {
 		this.surname = surname;
-		logger.info("set client's surname" );
+		logger.info("set client's surname" + surname);
 	}
 
 	public List<Book> getBookList() {
