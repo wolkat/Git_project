@@ -11,8 +11,8 @@ public class ChangeShelf implements IBookProcesses {
 	
 	@Override
 	public void processBook(BookEvent bookEvent) {
-		event.get_book().setWhichShelf("Nowosci");
-		logger.info(event.get_book().getName() + " - zmiana miejsca " + calendar.getTime());
+		//event.get_book().setWhichShelf("Nowosci");
+		//logger.info(event.get_book().getName() + " - zmiana miejsca " + calendar.getTime());
 
 	}
 
