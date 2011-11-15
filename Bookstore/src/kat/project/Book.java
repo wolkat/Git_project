@@ -1,4 +1,5 @@
-package kat;
+package kat.project;
+
 
 
 	public class Book {
@@ -6,6 +7,8 @@ package kat;
 		public String title;
 		public String author;
 		private double price;
+		public boolean cleanShelf;
+		public String whichShelf;
 		
 		public void setPrice(double price) throws PriceBelowZeroException
 		{
@@ -54,5 +57,21 @@ package kat;
 
 		public void setPrice(Integer cena) throws PriceBelowZeroException {
 			this.price = cena;
+		}
+		
+		public boolean isCleanShelf() {
+			return cleanShelf;
+		}
+
+		public void setCleanShelf(boolean cleanBox) {
+			this.cleanShelf = cleanBox;
+		}
+		
+		public String getWhichShelf() {
+			return whichShelf;
+		}
+
+		public void setWhichShelf(String whichShelf) {
+			this.whichShelf = whichShelf;
 		}
 	}
