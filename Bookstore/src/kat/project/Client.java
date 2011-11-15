@@ -16,7 +16,8 @@ public class Client {
 	public String surname;
 		
 	public List<Book> bookList = new ArrayList<Book>();
-	 Client(String name, String surname)
+	 
+	public Client(String name, String surname)
 	{
 		this.name = name;
 		this.surname = surname;
@@ -56,6 +57,7 @@ public class Client {
 	}
 
 	public void addBook(Book b) {
+		
 		bookList.add(b);
 		logger.info("added new book \"" +b.title +"\"" );
 	}
