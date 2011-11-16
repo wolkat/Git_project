@@ -41,10 +41,11 @@ public class Book {
 			this.genre=genre;
 		}
 		
-		public Book(String title, String author) 
+		public Book(String title, String author, Double price) 
 		{
 			this.title= title;
 			this.author= author;
+			this.price= price;
 		}
 		
 		public void printBooks()

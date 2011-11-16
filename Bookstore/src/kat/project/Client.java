@@ -11,7 +11,7 @@ public class Client {
 	
 	private static Logger logger= Logger.getLogger(Client.class);
 	
-
+	public Integer ID;
 	public String name;
 	public String surname;
 		
@@ -44,8 +44,8 @@ public class Client {
 	}
 
 	public void printClient() {
-		System.out.println("Imie: " + name + "\tNazwisko: " + surname);
-		logger.info("print client" + name + " " + surname);
+		System.out.println(name + " " + surname);
+		logger.info("print client " + name + " " + surname);
 	}
 
 	public void printBook() {
