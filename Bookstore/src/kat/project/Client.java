@@ -45,7 +45,7 @@ public class Client {
 
 	public void printClient() {
 		System.out.println("Imie: " + name + "\tNazwisko: " + surname);
-		logger.info("print client" );
+		logger.info("print client" + name + " " + surname);
 	}
 
 	public void printBook() {
@@ -76,13 +76,35 @@ public class Client {
 	}
 
 
-	public Book find(String title) {
+	public Book findBookTitle(String title) {
 		
 		for (Book book : bookList) {
 			if (book.getTitle().equals(title)) {
 				return book;
 			}
 			logger.info("found a book \"" + title+"\"" );
+		}
+		return null;
+	}
+	
+	public Book findBookGenre(BookGenre genre) {
+		
+		for (Book book : bookList) {
+			if (book.getGenre().equals(genre)) {
+				return book;
+			}
+			logger.info("found a book \"" + genre +"\"" );
+		}
+		return null;
+	}
+	
+	public Book findBookAuthor(String author) {
+		
+		for (Book book : bookList) {
+			if (book.getAuthor().equals(author)) {
+				return book;
+			}
+			logger.info("found a book \"" + author +"\"" );
 		}
 		return null;
 	}

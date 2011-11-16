@@ -1,12 +1,12 @@
 package kat.project;
 
-
-
-	public class Book {
+public class Book {
 		
 		public String title;
 		public String author;
 		private double price;
+		public Integer year;
+		public BookGenre genre;
 		public boolean cleanShelf;
 		public String whichShelf;
 		
@@ -17,10 +17,20 @@ package kat.project;
 			else this.price=price;
 		}
 		
+		public Book(String title, String author, BookGenre genre, Integer year, Double price)
+		{
+			this.title= title;
+			this.author=author;
+			this.genre=genre;
+			this.year=year;
+			this.price=price;
+		}
+		
 		public Book(String title, String author, BookGenre genre, Double price)
 		{
 			this.title= title;
 			this.author=author;
+			this.genre=genre;
 			this.price=price;
 		}
 		
@@ -28,20 +38,19 @@ package kat.project;
 		{
 			this.title= title;
 			this.author=author;
+			this.genre=genre;
 		}
 		
 		public Book(String title, String author) 
 		{
 			this.title= title;
 			this.author= author;
-
 		}
 		
 		public void printBooks()
 		{
 			System.out.println("Tytul: "+title + "\tAutor: "+ author + "\tCena: " + price + "PLN" );
 		}
-
 
 		public String getTitle() {
 			return title;
@@ -51,12 +60,36 @@ package kat.project;
 			this.title = title;
 		}
 
+		public String getAuthor() {
+			return author;
+		}
+
+		public void setAuthor(String author) {
+			this.author = author;
+		}
+				
+		public BookGenre getGenre() {
+			return genre;
+		}
+		
+		public void setGenre(BookGenre genre) {
+			this.genre = genre;
+		}
+		
+		public Integer getYear() {
+			return year;
+		}
+
+		public void setYear(Integer year) {
+			this.year = year;
+		}
+		
 		public Double getPrice() {
 			return price;
 		}
 
-		public void setPrice(Integer cena) throws PriceBelowZeroException {
-			this.price = cena;
+		public void setPrice(Double price) throws PriceBelowZeroException {
+			this.price = price;
 		}
 		
 		public boolean isCleanShelf() {

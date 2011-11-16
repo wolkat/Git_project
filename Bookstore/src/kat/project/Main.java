@@ -37,7 +37,7 @@ public class Main {
 		System.out.println("Lista ksiazek klienta "+c1.name+" "+c1.surname+":");
 		System.out.println("===========================");
 		c1.printBooks();
-		c1.deleteBook(b2);
+		c1.deleteBook(c1.findBookTitle("The Lunatic Cafe"));
 		try {
 			b1.setPrice(28.0);
 		} catch (PriceBelowZeroException e) {
@@ -51,6 +51,7 @@ public class Main {
 		System.out.println("Lista ksiazek klienta "+c2.name+" "+c2.surname+":");
 		System.out.println("===========================");
 		c2.printBooks();
+		
 		
 	}
 	
