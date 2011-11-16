@@ -14,6 +14,8 @@ public class Main {
 	public static void main(String[] args) {
 		
 		PropertyConfigurator.configure("Log4J.properties");
+		
+		List<Client> clientList = new ArrayList<Client>();
 	
 		List<Book> bookList1 = new ArrayList<Book>();
 		List<Book> bookList2 = new ArrayList<Book>();
@@ -38,6 +40,9 @@ public class Main {
 			logger.error("niepoprawna cena"+b1.getTitle());
 		}
 		
+		b2.setGenre(BookGenre.Fantasy);
+		b3.setGenre(BookGenre.Fantasy);
+		
 		c1.addBook(b1);
 		c1.addBook(b2);
 		c2.addBook(b3);
@@ -54,6 +59,8 @@ public class Main {
 		c2.printClient();
 		System.out.println("===========================");
 		c2.printBooks();
+		
+	//	clientList.toArray();
 		
 		
 	}
