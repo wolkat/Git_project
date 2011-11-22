@@ -73,13 +73,25 @@ public class Main {
 		System.out.println("===========================");
 		System.out.print("Ilosc klientow: "+ clientList.size());
 		
-	/*	EventManager eventManager = new EventManager();
+		EventManager eventManager = new EventManager();
 		IBookProcesses cleanBookShelf = new CleanBookShelf();
 		IBookProcesses changeShelf = new ChangeShelf();
 		
+		System.out.println("===========================");
+		System.out.println("## Test Events ##");
+		c1.findBooksGenre(BookGenre.Fantasy).get(0).setCleanShelf(true);
+		
+		System.out.println("Toy Story Fantasy CleanShelf /before/ - " + c1.findBooksTitle("Toy Story").get(0).isCleanShelf());
+		System.out.println("Samotny Drama CleanShelf /before/ - "+ c1.findBooksTitle("Samotny").get(0).isCleanShelf());
+		
 		eventManager.addProcess(changeShelf);
 		eventManager.addProcess(cleanBookShelf);
-	*/
+		eventManager.executeProcesses(c1.findBooksGenre(BookGenre.Fantasy));
+		
+		System.out.println("Toy Story Fantasy CleanShelf /after/ - " + c1.findBooksTitle("Toy Story").get(0).isCleanShelf());
+		System.out.println("Samotny Drama CleanShelf /after/ - "+ c1.findBooksTitle("Samotny").get(0).isCleanShelf());
+		
+	
 	}
 	
 }
