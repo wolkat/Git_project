@@ -10,9 +10,9 @@ public class ChangeShelf implements IBookProcesses {
     Calendar calendar = GregorianCalendar.getInstance();
 	
 	@Override
-	public void processBook(BookEvent bookEvent) {
-		//event.get_book().setWhichShelf("Nowosci");
-		//logger.info(event.get_book().getName() + " - zmiana miejsca " + calendar.getTime());
+	public void processBook(BookEvent event) {
+		event.get_book().setWhichShelf("Nowosci");
+		logger.info(event.get_book().getTitle() + " - zmiana miejsca " + calendar.getTime());
 
 	}
 

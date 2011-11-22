@@ -5,33 +5,30 @@ public class Book {
 		public String title;
 		public String author;
 		private double price;
-		public Integer year;
+		public int year;
 		public BookGenre genre;
 		public boolean cleanShelf;
 		public String whichShelf;
 		
-		public void setPrice(double price) throws PriceBelowZeroException
-		{
-			if (price <0)
-					throw new PriceBelowZeroException("cena nie moze byc ujemna");
-			else this.price=price;
-		}
-		
-		public Book(String title, String author, BookGenre genre, Integer year, Double price)
+		public Book(String title, String author, BookGenre genre, int year, double price)
 		{
 			this.title= title;
 			this.author=author;
 			this.genre=genre;
 			this.year=year;
 			this.price=price;
+			this.cleanShelf=false;
+			this.whichShelf="Nowosci";
 		}
 		
-		public Book(String title, String author, BookGenre genre, Double price)
+		public Book(String title, String author, BookGenre genre, double price)
 		{
 			this.title= title;
 			this.author=author;
 			this.genre=genre;
 			this.price=price;
+			this.cleanShelf=false;
+			this.whichShelf="Nowosci";
 		}
 		
 		public Book(String title, String author, BookGenre genre)
@@ -39,16 +36,20 @@ public class Book {
 			this.title= title;
 			this.author=author;
 			this.genre=genre;
+			this.cleanShelf=false;
+			this.whichShelf="Nowosci";
 		}
 		
-		public Book(String title, String author, Double price) 
+		public Book(String title, String author, double price) 
 		{
 			this.title= title;
 			this.author= author;
 			this.price= price;
+			this.cleanShelf=false;
+			this.whichShelf="Nowosci";
 		}
 		
-		public void printBooks()
+		public void printBook()
 		{
 			System.out.println("Tytul: "+title + "\tAutor: "+ author + "\tCena: " + price + "PLN" );
 		}
@@ -77,20 +78,23 @@ public class Book {
 			this.genre = genre;
 		}
 		
-		public Integer getYear() {
+		public int getYear() {
 			return year;
 		}
 
-		public void setYear(Integer year) {
+		public void setYear(int year) {
 			this.year = year;
 		}
 		
 		public Double getPrice() {
 			return price;
 		}
-
-		public void setPrice(Double price) throws PriceBelowZeroException {
-			this.price = price;
+		
+		public void setPrice(double price) throws PriceBelowZeroException
+		{
+			if (price <0)
+					throw new PriceBelowZeroException("cena nie moze byc ujemna");
+			else this.price=price;
 		}
 		
 		public boolean isCleanShelf() {

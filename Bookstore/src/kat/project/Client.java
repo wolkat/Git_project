@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-
 public class Client {
 	
 	private static Logger logger= Logger.getLogger(Client.class);
@@ -30,30 +29,23 @@ public class Client {
 		this.bookList=bookList;
 	}
 	
-	public String toString()
-	{
-		return name + " has " + bookList.size()+" cars.";
-	}
-	
-	public void printBooks()
-	{
-		for(Book b : this.bookList)
-		{
-			b.printBooks();
-		}
-	}
-
 	public void printClient() {
 		System.out.println(name + " " + surname);
 		logger.info("print client " + name + " " + surname);
 	}
 
-	public void printBook() {
-		for (Book b : bookList) {
-			b.printBooks();
+	public void printBooks() {
+		for (Book b : this.bookList) {
+			b.printBook();
 		}
 		logger.info("print books" );
+	}
 
+	public void printAll() {
+		System.out.println(name + " " + surname +": "+ bookList.size() + " book(s).");
+		for (Book b : this.bookList) {
+			b.printBook();
+		}
 	}
 
 	public void addBook(Book b) {
@@ -64,58 +56,56 @@ public class Client {
 
 	public void deleteBook(Book book) {
 		
-		bookList.remove(book);
-			
-			logger.info("removed book \"" + book.getTitle()+"\"" );
-		}
+		bookList.remove(book);	
+		logger.info("removed book \"" + book.getTitle()+"\"" );
+	}
 		
-
-	public void clearBookList() {
+	public void deleteBookList() {
 		bookList.clear();
 		logger.info("cleared bookList");
 	}
 
-
-	public Book findBookTitle(String title) {
+	public Book findBookTitleAuthor(String title, String author) {
 		
 		for (Book book : bookList) {
-			if (book.getTitle().equals(title)) {
+			if (book.getTitle().equals(title) && book.getAuthor().equals(author))					 
+			{
 				return book;
 			}
-			logger.info("found a book \"" + title+"\"" );
+			logger.info("found a book \"" + title +"\"" + "by "+ author);
 		}
 		return null;
 	}
 	
-	public Book findBookGenre(BookGenre genre) {
-		
+	public List<Book> findBooksGenre(BookGenre genre) {
+		List<Book> results= new ArrayList<Book>();
 		for (Book book : bookList) {
 			if (book.getGenre().equals(genre)) {
-				return book;
+				results.add(book);
 			}
-			logger.info("found a book \"" + genre +"\"" );
+			logger.info("found all books from genre " + genre );
 		}
-		return null;
+		return results;
 	}
 	
-	public Book findBookAuthor(String author) {
-		
+	public List<Book> findBooksAuthor(String author) {
+		List<Book> results= new ArrayList<Book>();
 		for (Book book : bookList) {
 			if (book.getAuthor().equals(author)) {
-				return book;
+				results.add(book);
 			}
-			logger.info("found a book \"" + author +"\"" );
+			logger.info("found all books by " + author );
 		}
-		return null;
+		return results;
 	}
 	
-	public List<Book> findAll(String title) {
+	public List<Book> findBooksTitle(String title) {
 		List<Book> results= new ArrayList<Book>();
 		for (Book book : bookList) {
 			if (book.getTitle().equals(title)) {
 				results.add(book);
 			}
-			logger.info("found all books" );
+			logger.info("found all books with title \"" + title + "\""  );
 		}
 		return results;
 	}
@@ -147,4 +137,11 @@ public class Client {
 		logger.info("set booklist" );
 	}
 	
+	public static Logger getLogger() {
+		return logger;
+	}
+
+	public static void setLogger(Logger logger) {
+		Client.logger = logger;
+	}
 }

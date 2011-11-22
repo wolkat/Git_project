@@ -23,7 +23,9 @@ public class ClientTest {
 	}
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() throws Exception {	
+		Book b = new Book("Polowanie", "Margit Sandemo", BookGenre.Fantasy, 19.8);
+		client1.addBook(b);
 	}
 
 	@After
@@ -33,9 +35,9 @@ public class ClientTest {
 	@Test
 	public void testClient() throws PriceBelowZeroException {
 		Client client2 = new Client("Jerzy", "Noga");
-		Book b = new Book("Polowanie", "Margit Sandemo", BookGenre.Fantasy, 19.8);
-		client2.addBook(b);
-		assertTrue(client2.getBookList().size() == 0);
+		Book b2 = new Book("Polowanie", "Margit Sandemo", BookGenre.Fantasy, 19.8);
+		client2.addBook(b2);
+		assertTrue(client2.getBookList().size() == 1);
 		assertTrue(client2.getName().equals("Jerzy"));
 	}
 
@@ -51,8 +53,6 @@ public class ClientTest {
 
 	@Test
 	public void testAddBook() throws PriceBelowZeroException {
-		Book b = new Book("Polowanie", "Margit Sandemo", BookGenre.Fantasy, 19.8);
-		client1.addBook(b);;
 		assertTrue(client1.getBookList().size() == 1);
 	}
 
@@ -76,9 +76,54 @@ public class ClientTest {
 	public void testSetBookList() {
 		fail("Not yet implemented");
 	}
-
+	
+	@Test
+	public void testFindBookTitleAuthor() {
+		assertNotNull(client1.findBookTitleAuthor("Polowanie", "Margit Sandemo"));
+		assertTrue(client1.findBookTitleAuthor("Polowanie", "Margit Sandemo").getTitle().equals("Polowanie") );
+		assertTrue(client1.findBookTitleAuthor("Polowanie", "Margit Sandemo").getAuthor().equals("Margit Sandemo"));
+	}
+	
+	@Test
+	public void testFindBooksGenre() {
+		assertNotNull(client1.findBooksGenre(BookGenre.Fantasy));
+		assertTrue(client1.findBooksGenre(BookGenre.Fantasy).size() > 0 );
+	}
+	
+	@Test
+	public void testFindBooksAuthor() {
+		assertNotNull(client1.findBooksAuthor("Margit Sandemo"));
+		assertTrue(client1.findBooksAuthor("Margit Sandemo").size() > 0 );
+	}
+	
+	@Test
+	public void testFindBooksTitle() {
+		assertNotNull(client1.findBooksTitle("Margit Sandemo"));
+		assertTrue(client1.findBooksTitle("Margit Sandemo").size() > 0 );
+	}
+	
+	@Test
+	public void testDeleteBook() {
+		Book b1 = new Book("Polowanie", "Margit Sandemo", BookGenre.Fantasy, 19.8);
+		client1.addBook(b1);
+		assertTrue(client1.getBookList().size() == 2);
+		client1.deleteBook(b1);
+		assertTrue(client1.getBookList().size() == 1);
+	}
+	
+	@Test
+	public void testDeleteBooklist() {
+		Book b3 = new Book("Samotny","Margit Sandemo", BookGenre.Drama, 18.9);
+		Book b4 = new Book("Equal Rites","Terry Pratchett", BookGenre.Fantasy, 19.0);
+		client1.addBook(b3);
+		client1.addBook(b4);
+		assertNotNull(client1.getBookList().size());
+		client1.deleteBookList();
+		assertNull(client1.getBookList().size());
+	}
+	
 	@Test(expected = PriceBelowZeroException.class, timeout = 100)
-	public void testPriceException() throws PriceBelowZeroException {
+	public void testPriceBelowZeroException() throws PriceBelowZeroException {
 		Book b = new Book("Polowanie", "Margit Sandemo", BookGenre.Fantasy, -2.0);
 		client1.addBook(b);
 	}

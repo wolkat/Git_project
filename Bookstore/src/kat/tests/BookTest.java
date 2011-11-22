@@ -24,6 +24,8 @@ public class BookTest {
 
 	@Before
 	public void setUp() throws Exception {
+		Book b = new Book("Polowanie", "Margit Sandemo", BookGenre.Fantasy, 19.8);
+		client1.addBook(b);
 	}
 
 	@After
@@ -32,8 +34,6 @@ public class BookTest {
 
 	@Test
 	public void testBook() throws PriceBelowZeroException {
-		Book b = new Book("Polowanie", "Margit Sandemo", BookGenre.Fantasy);
-		client1.addBook(b);
 		assertTrue(client1.getBookList().size()>0);
 	}
 
@@ -44,45 +44,33 @@ public class BookTest {
 
 	@Test
 	public void testGetTitle() throws PriceBelowZeroException {
-		Book b = new Book("Polowanie", "Margit Sandemo", BookGenre.Fantasy, 19.8);
-		client1.addBook(b);
 		assertTrue(client1.getBookList().get(0).getTitle().equals("Polowanie"));
 	}
 
 	@Test
 	public void testSetTitle() throws PriceBelowZeroException {
-		Book b = new Book("Polowanie", "Margit Sandemo", BookGenre.Fantasy, 19.8);
-		client1.addBook(b);
 		client1.getBookList().get(0).setTitle("Polowanie na czarownice");
 		assertTrue(client1.getBookList().get(0).getTitle().equals("Polowanie na czarownice"));
 	}
 
 	@Test
 	public void testGetPrice() throws PriceBelowZeroException {
-		Book b = new Book("Polowanie", "Margit Sandemo", BookGenre.Fantasy, 19.8);
-		client1.addBook(b);
 		assertTrue(client1.getBookList().get(0).getPrice()==19.8);
 	}
 
 	@Test
 	public void testSetPrice() throws PriceBelowZeroException {
-		Book b = new Book("Polowanie", "Margit Sandemo", BookGenre.Fantasy, 19.8);
-		client1.addBook(b);
 		client1.getBookList().get(0).setPrice(20);
 		assertTrue(client1.getBookList().get(0).getPrice()==20);
 	}
 
 	@Test
 	public void testIsCleanShelf() throws PriceBelowZeroException {
-		Book b = new Book("Polowanie", "Margit Sandemo", BookGenre.Fantasy, 19.8);
-		client1.addBook(b);
-		assertTrue(client1.getBookList().get(0).isCleanShelf()==true);
+		assertTrue(client1.getBookList().get(0).isCleanShelf()==false);
 	}
 
 	@Test
 	public void testSetCleanShelf() throws PriceBelowZeroException {
-		Book b = new Book("Polowanie", "Margit Sandemo", BookGenre.Fantasy, 19.8);
-		client1.addBook(b);
 		client1.getBookList().get(0).setCleanShelf(false);
 		assertTrue(client1.getBookList().get(0).isCleanShelf()==false);
 	}
