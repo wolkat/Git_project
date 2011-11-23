@@ -2,11 +2,7 @@ package kat.tests;
 
 import static org.junit.Assert.*;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 
 import kat.project.*;
 
@@ -44,24 +40,24 @@ public class BookTest {
 
 	@Test
 	public void testGetTitle() throws PriceBelowZeroException {
-		assertTrue(client1.getBookList().get(0).getTitle().equals("Polowanie"));
+		assertEquals(client1.getBookList().get(0).getTitle(),"Polowanie");
 	}
 
 	@Test
 	public void testSetTitle() throws PriceBelowZeroException {
 		client1.getBookList().get(0).setTitle("Polowanie na czarownice");
-		assertTrue(client1.getBookList().get(0).getTitle().equals("Polowanie na czarownice"));
+		assertEquals(client1.getBookList().get(0).getTitle(),"Polowanie na czarownice");
 	}
 
 	@Test
 	public void testGetPrice() throws PriceBelowZeroException {
-		assertTrue(client1.getBookList().get(0).getPrice()==19.8);
+		assertSame(client1.getBookList().get(0).getPrice(), 19.8);
 	}
 
 	@Test
 	public void testSetPrice() throws PriceBelowZeroException {
-		client1.getBookList().get(0).setPrice(20);
-		assertTrue(client1.getBookList().get(0).getPrice()==20);
+		client1.getBookList().get(0).setPrice(20.0);
+		assertSame(client1.getBookList().get(0).getPrice(), 20.0);
 	}
 
 	@Test

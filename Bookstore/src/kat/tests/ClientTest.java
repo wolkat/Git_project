@@ -37,8 +37,8 @@ public class ClientTest {
 		Client client2 = new Client("Jerzy", "Noga");
 		Book b2 = new Book("Polowanie", "Margit Sandemo", BookGenre.Fantasy, 19.8);
 		client2.addBook(b2);
-		assertTrue(client2.getBookList().size() == 1);
-		assertTrue(client2.getName().equals("Jerzy"));
+		assertSame(client2.getBookList().size(), 1);
+		assertEquals(client2.getName(),("Jerzy"));
 	}
 
 	@Test
@@ -53,18 +53,18 @@ public class ClientTest {
 
 	@Test
 	public void testAddBook() throws PriceBelowZeroException {
-		assertTrue(client1.getBookList().size() == 1);
+		assertSame(client1.getBookList().size(), 1);
 	}
 
 	@Test
 	public void testGetName() {
-		assertTrue(client1.getName() == "Jakub");
+		assertEquals(client1.getName(),"Jakub");
 	}
 
 	@Test
 	public void testSetName() {
 		client1.setName("Jerzy");
-		assertTrue(client1.getName() == "Jerzy");
+		assertEquals(client1.getName(), "Jerzy");
 	}
 
 	@Test
@@ -80,8 +80,8 @@ public class ClientTest {
 	@Test
 	public void testFindBookTitleAuthor() {
 		assertNotNull(client1.findBookTitleAuthor("Polowanie", "Margit Sandemo"));
-		assertTrue(client1.findBookTitleAuthor("Polowanie", "Margit Sandemo").getTitle().equals("Polowanie") );
-		assertTrue(client1.findBookTitleAuthor("Polowanie", "Margit Sandemo").getAuthor().equals("Margit Sandemo"));
+		assertSame(client1.findBookTitleAuthor("Polowanie", "Margit Sandemo").getTitle(),"Polowanie" );
+		assertSame(client1.findBookTitleAuthor("Polowanie", "Margit Sandemo").getAuthor(),"Margit Sandemo");
 	}
 	
 	@Test
@@ -106,9 +106,9 @@ public class ClientTest {
 	public void testDeleteBook() {
 		Book b1 = new Book("Polowanie", "Margit Sandemo", BookGenre.Fantasy, 19.8);
 		client1.addBook(b1);
-		assertTrue(client1.getBookList().size() == 2);
+		assertEquals(client1.getBookList().size(), 2);
 		client1.deleteBook(b1);
-		assertTrue(client1.getBookList().size() == 1);
+		assertEquals(client1.getBookList().size(), 1);
 	}
 	
 	@Test
