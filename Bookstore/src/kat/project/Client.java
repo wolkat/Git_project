@@ -59,6 +59,14 @@ public class Client {
 		bookList.remove(book);	
 		logger.info("removed book \"" + book.getTitle()+"\"" );
 	}
+	
+	public void deleteBooks(List<Book> bookL) {
+		
+		for (Book b : bookL) {
+		bookList.remove(b);	
+		}
+		logger.info("removed books from booklist" );
+	}
 		
 	public void deleteBookList() {
 		bookList.clear();

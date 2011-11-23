@@ -31,6 +31,7 @@ public class Main {
 		Book b4 = new Book("Toy Story","Andrzej Ziemianski",BookGenre.Fantasy, 21.5);
 		Book b5 = new Book("Samotny","Margit Sandemo", BookGenre.Drama, 18.9);
 		Book b6 = new Book("Equal Rites","Terry Pratchett", BookGenre.Fantasy, 19.0);
+		Book b7 = new Book("Trzy siostry","Terry Pratchett", BookGenre.Fantasy, 17.0);
 		
 				
 		try {
@@ -49,8 +50,10 @@ public class Main {
 		c1.addBook(b5);
 		c2.addBook(b3);
 		c2.addBook(b6);
+		c2.addBook(b7);
 		
 		c1.deleteBook(c1.findBookTitleAuthor("The Lunatic Cafe", "Laurell K. Hamilton"));
+		c2.deleteBooks(c2.findBooksAuthor("Terry Pratchett"));
 		
 		clientList.add(0, c1);
 		clientList.add(1, c2);
@@ -71,7 +74,7 @@ public class Main {
 		System.out.println("===========================");
 		c2.printAll();
 		System.out.println("===========================");
-		System.out.print("Ilosc klientow: "+ clientList.size());
+		System.out.println("Ilosc klientow: "+ clientList.size());
 		
 		EventManager eventManager = new EventManager();
 		IBookProcesses cleanBookShelf = new CleanBookShelf();
@@ -81,15 +84,15 @@ public class Main {
 		System.out.println("## Test Events ##");
 		c1.findBooksGenre(BookGenre.Fantasy).get(0).setCleanShelf(true);
 		
-		System.out.println("Toy Story Fantasy CleanShelf /before/ - " + c1.findBooksTitle("Toy Story").get(0).isCleanShelf());
-		System.out.println("Samotny Drama CleanShelf /before/ - "+ c1.findBooksTitle("Samotny").get(0).isCleanShelf());
+		System.out.println("Toy Story Fantasy CleanShelf /przed/ - " + c1.findBooksTitle("Toy Story").get(0).isCleanShelf());
+		System.out.println("Samotny Drama CleanShelf /przed/ - "+ c1.findBooksTitle("Samotny").get(0).isCleanShelf());
 		
 		eventManager.addProcess(changeShelf);
 		eventManager.addProcess(cleanBookShelf);
 		eventManager.executeProcesses(c1.findBooksGenre(BookGenre.Fantasy));
 		
-		System.out.println("Toy Story Fantasy CleanShelf /after/ - " + c1.findBooksTitle("Toy Story").get(0).isCleanShelf());
-		System.out.println("Samotny Drama CleanShelf /after/ - "+ c1.findBooksTitle("Samotny").get(0).isCleanShelf());
+		System.out.println("Toy Story Fantasy CleanShelf /po/ - " + c1.findBooksTitle("Toy Story").get(0).isCleanShelf());
+		System.out.println("Samotny Drama CleanShelf /po/ - "+ c1.findBooksTitle("Samotny").get(0).isCleanShelf());
 		
 	
 	}
