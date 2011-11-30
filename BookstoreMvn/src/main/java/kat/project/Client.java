@@ -10,11 +10,13 @@ public class Client {
 	
 	private static Logger logger= Logger.getLogger(Client.class);
 	
-	public Integer ID;
+	public long id;
 	public String name;
 	public String surname;
 		
 	public List<Book> bookList = new ArrayList<Book>();
+	
+	public Client() {}
 	 
 	public Client(String name, String surname)
 	{
@@ -151,5 +153,12 @@ public class Client {
 
 	public static void setLogger(Logger logger) {
 		Client.logger = logger;
+	}
+	
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
 	}
 }
