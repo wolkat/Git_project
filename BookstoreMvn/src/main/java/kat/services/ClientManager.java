@@ -30,9 +30,9 @@ public class ClientManager {
 		connect = DriverManager.getConnection(url);
 		statement = connect.createStatement();
 
-		ResultSet rs = connect.getMetaData().getTables(null, null, null,
-				null);
+		ResultSet rs = connect.getMetaData().getTables(null, null, null, null);
 		boolean tableExists = false;
+		
 		while (rs.next()) {
 			if ("Client".equalsIgnoreCase(rs.getString("TABLE_NAME"))) {
 				tableExists = true;
@@ -41,66 +41,61 @@ public class ClientManager {
 		}
 	
 
-		if (!tableExists)
-			statement.executeUpdate(createTableClient);
+		if (!tableExists) statement.executeUpdate(createTableClient);
 
-		addClientStmt = connect
-				.prepareStatement("INSERT INTO Client (name, surname) VALUES (?, ?)");
-		deleteAllClientsStmt = connect
-				.prepareStatement("DELETE FROM Client");
-		getAllClientsStmt = connect
-				.prepareStatement("SELECT id, name, surname FROM Client");
+		addClientStmt = connect.prepareStatement("INSERT INTO Client (name, surname) VALUES (?, ?)");
+		deleteAllClientsStmt = connect.prepareStatement("DELETE FROM Client");
+		getAllClientsStmt = connect.prepareStatement("SELECT id, name, surname FROM Client");
 
 	} catch (SQLException e) {
 		e.printStackTrace();
-	}
-}
-
-
-Connection getConnection() {
-	return connect;
-}
-
-void clearClients() {
-	try {
-		deleteAllClientsStmt.executeUpdate();
-	} catch (SQLException e) {
-		e.printStackTrace();
-	}
-}
-
-public int addClient(Client client) {
-	int count = 0;
-	try {
-		addClientStmt.setString(1, client.getName());
-		addClientStmt.setString(2, client.getSurname());
-
-		count = addClientStmt.executeUpdate();
-
-	} catch (SQLException e) {
-		e.printStackTrace();
-	}
-	return count;
-}
-
-public List<Client> getAllClients() {
-	List<Client> clients = new ArrayList<Client>();
-
-	try {
-		ResultSet rs = getAllClientsStmt.executeQuery();
-
-		while (rs.next()) {
-			Client c = new Client();
-			c.setId(rs.getInt("id"));
-			c.setName(rs.getString("name"));
-			clients.add(c);
 		}
-
-	} catch (SQLException e) {
-		e.printStackTrace();
 	}
-	return clients;
-}
 
 
+	Connection getConnection() {
+		return connect;
+	}
+
+	void clearClients() {
+		try {
+			deleteAllClientsStmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public int addClient(Client c) {
+		int count = 0;
+		try {
+			addClientStmt.setString(1, c.getName());
+			addClientStmt.setString(2, c.getSurname());
+
+			count = addClientStmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+
+	public List<Client> getAllClients() {
+		List<Client> clients = new ArrayList<Client>();
+
+		try {
+			ResultSet rs = getAllClientsStmt.executeQuery();
+
+			while (rs.next()) {
+				Client c = new Client();
+				c.setId(rs.getInt("id"));
+				c.setName(rs.getString("name"));
+				c.setSurname(rs.getString("surname"));
+				clients.add(c);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return clients;
+	}
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kat.events.*;
+import kat.services.ClientManager;
 
 import org.apache.log4j.PropertyConfigurator;
 import org.apache.log4j.Logger;
@@ -93,6 +94,16 @@ public class Main {
 		
 		System.out.println("Toy Story Fantasy CleanShelf /po/ - " + c1.findBooksTitle("Toy Story").get(0).isCleanShelf());
 		System.out.println("Samotny Drama CleanShelf /po/ - "+ c1.findBooksTitle("Samotny").get(0).isCleanShelf());
+		
+		
+		ClientManager clientManager = new ClientManager();
+		clientManager.addClient(c1);
+		//clientManager.addClient(c2);
+
+		for(Client c: clientManager.getAllClients())
+		{
+			System.out.println(c);
+		}
 		
 	
 	}
