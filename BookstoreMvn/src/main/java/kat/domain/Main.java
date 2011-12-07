@@ -98,7 +98,7 @@ public class Main {
 		
 		ClientManager clientManager = new ClientManager();
 		clientManager.addClient(c1);
-		//clientManager.addClient(c2);
+		clientManager.addClient(c2);
 
 		for(Client c: clientManager.getAllClients())
 		{
