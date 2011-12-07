@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import kat.project.*;
+import kat.domain.*;
 
 public class ClientTest {
 
@@ -16,6 +16,7 @@ public class ClientTest {
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		
 	}
 
 	@AfterClass
@@ -24,6 +25,7 @@ public class ClientTest {
 
 	@Before
 	public void setUp() throws Exception {	
+		
 		Book b = new Book("Polowanie", "Margit Sandemo", BookGenre.Fantasy, 19.8);
 		client1.addBook(b);
 	}

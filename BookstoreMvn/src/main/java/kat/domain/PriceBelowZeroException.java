@@ -1,5 +1,5 @@
 
-package kat.project;
+package kat.domain;
 
 public class PriceBelowZeroException extends Exception {
 

@@ -9,7 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import kat.project.*;
+import kat.domain.*;
 
 public class ClientManager {
 	
@@ -78,6 +78,7 @@ public class ClientManager {
 		}
 		return count;
 	}
+	
 
 	public List<Client> getAllClients() {
 		List<Client> clients = new ArrayList<Client>();

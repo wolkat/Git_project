@@ -1,6 +1,6 @@
 package kat.events;
 
-import kat.project.*;
+import kat.domain.*;
 
 public class BookEvent {
 

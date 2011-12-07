@@ -2,7 +2,7 @@ package kat.events;
 
 import java.util.*;
 
-import kat.project.*;
+import kat.domain.*;
 
 public class EventManager {
 

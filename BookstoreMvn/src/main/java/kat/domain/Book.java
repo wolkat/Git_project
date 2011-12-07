@@ -1,4 +1,4 @@
-package kat.project;
+package kat.domain;
 
 public class Book {
 		
