@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kat.events.*;
-import kat.services.ClientManager;
+import kat.services.*;
 
 import org.apache.log4j.PropertyConfigurator;
 import org.apache.log4j.Logger;
@@ -99,6 +99,15 @@ public class Main {
 		ClientManager clientManager = new ClientManager();
 		clientManager.addClient(c1);
 		clientManager.addClient(c2);
+
+		for(Client c: clientManager.getAllClients())
+		{
+			System.out.println(c);
+		}
+		
+		BooksManager booksManager = new BooksManager();
+		booksManager.addBook(b1);
+		booksManager.addBook(b2);
 
 		for(Client c: clientManager.getAllClients())
 		{

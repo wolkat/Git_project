@@ -1,7 +1,9 @@
 package kat.domain;
 
 public class Book {
-		
+	
+	
+		public long id;
 		public String title;
 		public String author;
 		private double price;
@@ -10,6 +12,9 @@ public class Book {
 		public boolean cleanShelf;
 		public String whichShelf;
 		
+		public Book(){
+			
+		}
 		public Book(String title, String author, BookGenre genre, int year, double price)
 		{
 			this.title= title;
@@ -111,5 +116,13 @@ public class Book {
 
 		public void setWhichShelf(String whichShelf) {
 			this.whichShelf = whichShelf;
+		}
+		
+		public long getId() {
+			return id;
+		}
+		
+		public void setId(long id) {
+			this.id = id;
 		}
 	}
