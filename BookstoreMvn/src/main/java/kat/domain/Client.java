@@ -2,8 +2,7 @@ package kat.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-
-
+import javax.validation.constraints.Size;
 import org.apache.log4j.Logger;
 
 public class Client {
@@ -11,8 +10,8 @@ public class Client {
 	private static Logger logger= Logger.getLogger(Client.class);
 	
 	public long id;
-	public String name;
-	public String surname;
+	public String name = "unknown";
+	public String surname = "unknown";
 		
 	public List<Book> bookList = new ArrayList<Book>();
 	
@@ -120,10 +119,11 @@ public class Client {
 		return results;
 	}
 
+	@Size(min = 2, max = 20)
 	public String getName() {
 		return name;
 	}
-
+	
 	public void setName(String name) {
 		this.name = name;
 		logger.info("set client's name" + name);

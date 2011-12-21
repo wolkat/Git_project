@@ -7,7 +7,7 @@ import kat.domain.*;
 public class EventManager {
 
 	private Book book;
-	private List processes = new ArrayList();
+	private List<IBookProcesses> processes = new ArrayList<IBookProcesses>();
 
 	public Book getBook() {
 		return book;
@@ -29,7 +29,7 @@ public class EventManager {
 		for (Book book : list) {
 			setBook(book);
 			BookEvent event = new BookEvent(this, book);
-			Iterator proc = processes.iterator();
+			Iterator<IBookProcesses> proc = processes.iterator();
 			while (proc.hasNext()) {
 				((IBookProcesses) proc.next()).processBook(event);
 			}
