@@ -1,8 +1,5 @@
 package com.kat.bookstore.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.kat.bookstore.events.*;
 import com.kat.bookstore.service.*;
 
@@ -16,33 +13,18 @@ public class Main {
 	public static void main(String[] args) throws PriceBelowZeroException {
 		
 		//PropertyConfigurator.configure("src/main/resources/Log4J.properties");
+
+		Client c1 = new Client("Jan", "Nowak");
+		Client c2 = new Client("Julek", "Kowal");
 		
-		List<Client> clientList = new ArrayList<Client>();
-	
-		List<Book> bookList1 = new ArrayList<Book>();
-		List<Book> bookList2 = new ArrayList<Book>();
-		
-		Client c1 = new Client("Jan", "Nowak", bookList1);
-		Client c2 = new Client("Julek", "Kowal", bookList2);
-		
-		
-		Book b1 = new Book("The Lunatic Cafe","Laurell K. Hamilton",BookGenre.Horror, 21.5);
-		Book b2 = new Book("Spellbound","Margit Sandemo", 29.0);
-		Book b3 = new Book("Achaja","Andrzej Ziemianski", 18.9);
-		Book b4 = new Book("Toy Story","Andrzej Ziemianski",BookGenre.Fantasy, 21.5);
-		Book b5 = new Book("Samotny","Margit Sandemo", BookGenre.Drama, 18.9);
-		Book b6 = new Book("Equal Rites","Terry Pratchett", BookGenre.Fantasy, 19.0);
-		Book b7 = new Book("Trzy siostry","Terry Pratchett", BookGenre.Fantasy, 17.0);
-		
-		/*		
-		try {
-			b1.setPrice(-2.0);
-			b2.setPrice(28.0);
-		} catch (PriceBelowZeroException e) {
-			e.printStackTrace();
-			logger.error("niepoprawna cena"+b1.getTitle());
-		} */
-		
+		Book b1 = new Book("The Lunatic Cafe","Laurell K. Hamilton",BookGenre.Horror, 2007, 21.5);
+		Book b2 = new Book("Spellbound","Margit Sandemo", BookGenre.Romance, 1988, 29.0);
+		Book b3 = new Book("Achaja","Andrzej Ziemianski", BookGenre.Fantasy, 2008, 18.9);
+		Book b4 = new Book("Toy Story","Andrzej Ziemianski",BookGenre.Horror, 2007, 21.5);
+		Book b5 = new Book("Samotny","Margit Sandemo", BookGenre.Drama, 1990, 18.9);
+		Book b6 = new Book("Equal Rites","Terry Pratchett", BookGenre.Fantasy, 1999, 19.0);
+		Book b7 = new Book("Trzy siostry","Terry Pratchett", BookGenre.Mistery, 1998, 17.0);
+				
 		b2.setGenre(BookGenre.Fantasy);
 		b3.setGenre(BookGenre.Fantasy);
 		c1.addBook(b1);
@@ -56,8 +38,6 @@ public class Main {
 		c1.deleteBook(c1.findBookTitleAuthor("The Lunatic Cafe", "Laurell K. Hamilton"));
 		c2.deleteBooks(c2.findBooksAuthor("Terry Pratchett"));
 		
-		clientList.add(0, c1);
-		clientList.add(1, c2);
 		
 		System.out.print("Lista ksiazek klienta ");
 		c1.printClient();
@@ -75,7 +55,6 @@ public class Main {
 		System.out.println("===========================");
 		c2.printAll();
 		System.out.println("===========================");
-		System.out.println("Ilosc klientow: "+ clientList.size());
 		
 		EventManager eventManager = new EventManager();
 		IBookProcesses cleanBookShelf = new CleanBookShelf();

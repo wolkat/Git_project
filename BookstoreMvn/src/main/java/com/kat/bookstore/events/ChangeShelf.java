@@ -11,7 +11,7 @@ public class ChangeShelf implements IBookProcesses {
 	
 
 	public void processBook(BookEvent event) {
-		event.get_book().setWhichShelf("Do segregacji");
+		//event.get_book().setWhichShelf();
 		logger.info(event.get_book().getTitle() + " - zmiana miejsca " + calendar.getTime());
 
 	}

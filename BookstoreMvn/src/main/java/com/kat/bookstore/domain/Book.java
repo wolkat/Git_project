@@ -2,7 +2,6 @@ package com.kat.bookstore.domain;
 
 public class Book {
 	
-	
 		public long id;
 		public String title;
 		public String author;
@@ -10,11 +9,10 @@ public class Book {
 		public int year;
 		public BookGenre genre;
 		public boolean cleanShelf;
-		public String whichShelf;
+		public ShelfName whichShelf;
 		
-		public Book(){
-			
-		}
+		public Book(){}
+		
 		public Book(String title, String author, BookGenre genre, int year, double price)
 		{
 			this.title= title;
@@ -23,35 +21,7 @@ public class Book {
 			this.year=year;
 			this.price=price;
 			this.cleanShelf=false;
-			this.whichShelf="Nowosci";
-		}
-		
-		public Book(String title, String author, BookGenre genre, double price)
-		{
-			this.title= title;
-			this.author=author;
-			this.genre=genre;
-			this.price=price;
-			this.cleanShelf=false;
-			this.whichShelf="Nowosci";
-		}
-		
-		public Book(String title, String author, BookGenre genre)
-		{
-			this.title= title;
-			this.author=author;
-			this.genre=genre;
-			this.cleanShelf=false;
-			this.whichShelf="Nowosci";
-		}
-		
-		public Book(String title, String author, double price) 
-		{
-			this.title= title;
-			this.author= author;
-			this.price= price;
-			this.cleanShelf=false;
-			this.whichShelf="Nowosci";
+			this.whichShelf= ShelfName.Newest;
 		}
 		
 		public void printBook()
@@ -110,11 +80,11 @@ public class Book {
 			this.cleanShelf = cleanBox;
 		}
 		
-		public String getWhichShelf() {
+		public ShelfName getWhichShelf() {
 			return whichShelf;
 		}
 
-		public void setWhichShelf(String whichShelf) {
+		public void setWhichShelf(ShelfName whichShelf) {
 			this.whichShelf = whichShelf;
 		}
 		

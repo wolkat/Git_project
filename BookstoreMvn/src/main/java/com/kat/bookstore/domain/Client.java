@@ -15,24 +15,17 @@ public class Client {
 		
 	public List<Book> bookList = new ArrayList<Book>();
 	
-	public Client() {}
-	 
+	public Client(){} 
+	
 	public Client(String name, String surname)
 	{
 		this.name = name;
 		this.surname = surname;
 	}
 	
-	public Client(String name, String surname, List<Book> bookList)
-	{
-		this.name=name;
-		this.surname=surname;
-		this.bookList=bookList;
-	}
-	
 	public void printClient() {
 		System.out.println(name + " " + surname);
-		logger.info("print client " + name + " " + surname);
+		logger.info("print client: " + name + " " + surname);
 	}
 
 	public void printBooks() {
@@ -49,16 +42,14 @@ public class Client {
 		}
 	}
 
-	public void addBook(Book b) {
-		
+	public void addBook(Book b) {	
 		bookList.add(b);
-		logger.info("added new book \"" +b.title +"\"" );
+		logger.info("added book \"" +b.title +"\" to client "+ name + " " + surname);
 	}
 
 	public void deleteBook(Book book) {
-		
 		bookList.remove(book);	
-		logger.info("removed book \"" + book.getTitle()+"\"" );
+		logger.info("removed book \"" + book.getTitle()+"\" from client "+ name + " " + surname);
 	}
 	
 	public void deleteBooks(List<Book> bookL) {
@@ -66,12 +57,12 @@ public class Client {
 		for (Book b : bookL) {
 		bookList.remove(b);	
 		}
-		logger.info("removed books from booklist" );
+		logger.info("removed books from "+ name +" " + surname + "'s booklist" );
 	}
 		
 	public void deleteBookList() {
 		bookList.clear();
-		logger.info("cleared bookList");
+		logger.info("cleared client's ("+name+" "+surname+") booklist");
 	}
 
 	public Book findBookTitleAuthor(String title, String author) {
@@ -103,7 +94,7 @@ public class Client {
 			if (book.getAuthor().equals(author)) {
 				results.add(book);
 			}
-			logger.info("found all books by " + author );
+			logger.info("found books by " + author );
 		}
 		return results;
 	}
