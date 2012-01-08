@@ -11,7 +11,7 @@ import java.util.List;
 
 import com.kat.bookstore.domain.*;
 
-public class ClientManager {
+public class ClientBaseMgr {
 	
 	private Connection connect;
 
@@ -26,7 +26,7 @@ public class ClientManager {
 
 	private Statement statement;
 	
-	public ClientManager() {
+	public ClientBaseMgr() {
 	try {
 		connect = DriverManager.getConnection(url);
 		statement = connect.createStatement();

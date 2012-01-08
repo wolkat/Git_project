@@ -9,7 +9,6 @@ public class Book {
 		public int year;
 		public BookGenre genre;
 		public boolean cleanShelf;
-		public ShelfName whichShelf;
 		
 		public Book(){}
 		
@@ -21,7 +20,6 @@ public class Book {
 			this.year=year;
 			this.price=price;
 			this.cleanShelf=false;
-			this.whichShelf= ShelfName.Newest;
 		}
 		
 		public void printBook()
@@ -78,14 +76,6 @@ public class Book {
 
 		public void setCleanShelf(boolean cleanBox) {
 			this.cleanShelf = cleanBox;
-		}
-		
-		public ShelfName getWhichShelf() {
-			return whichShelf;
-		}
-
-		public void setWhichShelf(ShelfName whichShelf) {
-			this.whichShelf = whichShelf;
 		}
 		
 		public long getId() {

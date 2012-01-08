@@ -4,7 +4,7 @@ import java.util.*;
 
 import com.kat.bookstore.domain.*;
 
-public class EventManager {
+public class EventMgr {
 
 	private Book book;
 	private List<IBookProcesses> processes = new ArrayList<IBookProcesses>();

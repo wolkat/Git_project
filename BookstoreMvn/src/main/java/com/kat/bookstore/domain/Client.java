@@ -21,25 +21,19 @@ public class Client {
 	{
 		this.name = name;
 		this.surname = surname;
+		this.bookList = new ArrayList<Book>();
 	}
 	
 	public void printClient() {
-		System.out.println(name + " " + surname);
-		logger.info("print client: " + name + " " + surname);
+		System.out.println(this.name + " " + this.surname);
+		logger.info("print client: " + this.name + " " + this.surname);
 	}
 
 	public void printBooks() {
 		for (Book b : this.bookList) {
 			b.printBook();
 		}
-		logger.info("print books" );
-	}
-
-	public void printAll() {
-		System.out.println(name + " " + surname +": "+ bookList.size() + " book(s).");
-		for (Book b : this.bookList) {
-			b.printBook();
-		}
+		logger.info("print client's ("+this.name+" "+this.surname+") booklist " );
 	}
 
 	public void addBook(Book b) {	
@@ -47,9 +41,9 @@ public class Client {
 		logger.info("added book \"" +b.title +"\" to client "+ name + " " + surname);
 	}
 
-	public void deleteBook(Book book) {
-		bookList.remove(book);	
-		logger.info("removed book \"" + book.getTitle()+"\" from client "+ name + " " + surname);
+	public void deleteBook(Book b) {
+		bookList.remove(b);	
+		logger.info("removed book \"" + b.getTitle()+"\" from client "+ name + " " + surname);
 	}
 	
 	public void deleteBooks(List<Book> bookL) {
@@ -57,7 +51,7 @@ public class Client {
 		for (Book b : bookL) {
 		bookList.remove(b);	
 		}
-		logger.info("removed books from "+ name +" " + surname + "'s booklist" );
+		logger.info("removed books from "+ this.name +" " + this.surname + "'s booklist" );
 	}
 		
 	public void deleteBookList() {
@@ -65,34 +59,22 @@ public class Client {
 		logger.info("cleared client's ("+name+" "+surname+") booklist");
 	}
 
-	public Book findBookTitleAuthor(String title, String author) {
-		
-		for (Book book : bookList) {
-			if (book.getTitle().equals(title) && book.getAuthor().equals(author))					 
-			{
-				return book;
-			}
-			logger.info("found a book \"" + title +"\"" + "by "+ author);
-		}
-		return null;
-	}
-	
 	public List<Book> findBooksGenre(BookGenre genre) {
 		List<Book> results= new ArrayList<Book>();
-		for (Book book : bookList) {
-			if (book.getGenre().equals(genre)) {
-				results.add(book);
+		for (Book b : bookList) {
+			if (b.getGenre().equals(genre)) {
+				results.add(b);
 			}
-			logger.info("found all books from genre " + genre );
+			logger.info("found all books from genre: " + genre );
 		}
 		return results;
 	}
 	
 	public List<Book> findBooksAuthor(String author) {
 		List<Book> results= new ArrayList<Book>();
-		for (Book book : bookList) {
-			if (book.getAuthor().equals(author)) {
-				results.add(book);
+		for (Book b : bookList) {
+			if (b.getAuthor().equals(author)) {
+				results.add(b);
 			}
 			logger.info("found books by " + author );
 		}
@@ -101,13 +83,24 @@ public class Client {
 	
 	public List<Book> findBooksTitle(String title) {
 		List<Book> results= new ArrayList<Book>();
-		for (Book book : bookList) {
-			if (book.getTitle().equals(title)) {
-				results.add(book);
+		for (Book b : bookList) {
+			if (b.getTitle().equals(title)) {
+				results.add(b);
 			}
 			logger.info("found all books with title \"" + title + "\""  );
 		}
 		return results;
+	}
+	
+	public void removeAllBooksByList(List<Book> tempBookList) {
+		for (Book b : bookList) {
+			for (Book tempB : tempBookList) {
+				if (b.equals(tempB)) {
+					bookList.remove(b);
+				}
+			}
+		logger.info("removed all books from list \"" + tempBookList + "\""  );
+		}
 	}
 
 	@Size(min = 2, max = 20)

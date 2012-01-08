@@ -20,7 +20,7 @@ public class BookTest {
 
 	@Before
 	public void setUp() throws Exception {
-		Book b = new Book("Polowanie", "Margit Sandemo", BookGenre.Fantasy, 19.8);
+		Book b = new Book("Polowanie", "Margit Sandemo", BookGenre.Fantasy, 1988, 19.8);
 		client1.addBook(b);
 	}
 

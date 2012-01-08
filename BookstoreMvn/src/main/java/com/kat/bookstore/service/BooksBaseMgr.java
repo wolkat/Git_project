@@ -11,7 +11,7 @@ import java.util.List;
 
 import com.kat.bookstore.domain.*;
 
-public class BooksManager {
+public class BooksBaseMgr {
 	
 	private Connection connect;
 
@@ -26,7 +26,7 @@ public class BooksManager {
 
 	private Statement statement;
 	
-	public BooksManager() {
+	public BooksBaseMgr() {
 	try {
 		connect = DriverManager.getConnection(url);
 		statement = connect.createStatement();
