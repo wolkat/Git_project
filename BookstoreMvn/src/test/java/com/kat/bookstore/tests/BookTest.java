@@ -1,7 +1,6 @@
 package com.kat.bookstore.tests;
 
 import static org.junit.Assert.*;
-
 import org.junit.*;
 
 import com.kat.bookstore.domain.*;
