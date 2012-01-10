@@ -12,7 +12,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-		PropertyConfigurator.configure("Log4J.properties");
+		PropertyConfigurator.configure("log4j.properties");
 		System.out.print("Main works");
 		logger.info("Started main class");
 		
