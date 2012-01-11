@@ -10,12 +10,17 @@ public class Main {
 	
 	private static Logger logger = Logger.getLogger(Main.class);
 	
-	public static void main(String[] args) {
+	public static void cleanDB(BooksBaseMgr booksMgr,
+			ClientBaseMgr clientMgr, ClientBookBaseMgr dbClientBook) {
+				dbClientBook.deleteAll();
+				booksMgr.deleteAllBooks();
+				clientMgr.deleteAllClients();
+	};
+	
+	public static void main(String[] args) throws PriceBelowZeroException {
 		
-		PropertyConfigurator.configure("log4j.properties");
-		System.out.print("Main works");
-		logger.info("Started main class");
-		
+	
+		logger.info("Started main class");	
 		
 		Client c1 = new Client("Jan", "Nowak");
 		Client c2 = new Client("Julek", "Kowal");
@@ -26,8 +31,8 @@ public class Main {
 		Book b4 = new Book("Toy Story","Andrzej Ziemianski",BookGenre.Horror, 2007, 21.5);
 		Book b5 = new Book("Samotny","Margit Sandemo", BookGenre.Drama, 1990, 18.9);
 		Book b6 = new Book("Equal Rites","Terry Pratchett", BookGenre.Fantasy, 1999, 19.0);
-		Book b7 = new Book("Trzy siostry","Terry Pratchett", BookGenre.Mistery, 1998, 17.0);
-			
+		Book b7 = new Book("Trzy siostry","Terry Pratchett", BookGenre.Mistery, 1998, 17.0);	
+		
 		b2.setGenre(BookGenre.Fantasy);
 		b3.setGenre(BookGenre.Fantasy);
 		c1.addBook(b1);
@@ -38,6 +43,7 @@ public class Main {
 		c2.addBook(b6);
 		c2.addBook(b7);
 		
+		c2.printBookList(c2.findBooksAuthor("Terry Pratchett"));
 		c1.deleteBooks(c1.findBooksTitle("The Lunatic Cafe"));
 		c2.deleteBooks(c2.findBooksAuthor("Terry Pratchett"));
 		
@@ -87,11 +93,13 @@ public class Main {
 		booksMgr.addBook(b1);
 		booksMgr.addBook(b2);
 
-		for(Client c: clientMgr.getAllClients())
+		for(Book b: booksMgr.getAllBooks())
 		{
-			System.out.println(c);
+			System.out.println(b);
 		}
 		
+		ClientBookBaseMgr dbClientBook = new ClientBookBaseMgr();
+		//dbClientBook.addBooksClient(clientMgr.getAllClientsID(),booksMgr.getAllBooksID());
 	
 	}
 	

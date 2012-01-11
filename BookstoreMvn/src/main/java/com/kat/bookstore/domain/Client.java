@@ -35,6 +35,11 @@ public class Client {
 		}
 		logger.info("print client's ("+this.name+" "+this.surname+") booklist " );
 	}
+	
+	public void printBookList(List<Book> tmpList) {
+		for (Book b : tmpList)
+			b.printBook();
+	}
 
 	public void addBook(Book b) {	
 		bookList.add(b);
