@@ -45,6 +45,7 @@ public class ClientTest {
 	}
 
 	@Test
+	@Ignore
 	public void testPrintBooks() {
 
 		//assertSame(client1.bookList, client1.printBooks());
@@ -59,7 +60,8 @@ public class ClientTest {
 
 	@Test
 	public void testAddBook() throws PriceBelowZeroException {
-		assertSame(client1.getBookList().size(), 1);
+		client2.addBook(b);
+		assertSame(client2.getBookList().size(), 1);
 	}
 
 	@Test
@@ -85,6 +87,7 @@ public class ClientTest {
 	
 	@Test
 	public void testFindBooksGenre() {
+		client1.addBook(b);
 		assertNotNull(client1.findBooksGenre(BookGenre.Fantasy));
 		assertTrue(client1.findBooksGenre(BookGenre.Fantasy).size() > 0 );
 	}

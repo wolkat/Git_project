@@ -45,7 +45,6 @@ public class Main {
 		
 		c2.printBookList(c2.findBooksAuthor("Terry Pratchett"));
 		c1.deleteBooks(c1.findBooksTitle("The Lunatic Cafe"));
-		c2.deleteBooks(c2.findBooksAuthor("Terry Pratchett"));
 		
 		
 		System.out.print("Lista ksiazek klienta ");
@@ -92,6 +91,11 @@ public class Main {
 		BooksBaseMgr booksMgr = new BooksBaseMgr();
 		booksMgr.addBook(b1);
 		booksMgr.addBook(b2);
+		booksMgr.addBook(b4);
+		booksMgr.addBook(b5);
+		booksMgr.addBook(b3);
+		booksMgr.addBook(b6);
+		booksMgr.addBook(b7);
 
 		for(Book b: booksMgr.getAllBooks())
 		{
@@ -99,7 +103,7 @@ public class Main {
 		}
 		
 		ClientBookBaseMgr dbClientBook = new ClientBookBaseMgr();
-		//dbClientBook.addBooksClient(clientMgr.getAllClientsID(),booksMgr.getAllBooksID());
+		dbClientBook.addBooksClient(clientMgr.getAllClientsID(),booksMgr.getAllBooksID());
 	
 	}
 	
