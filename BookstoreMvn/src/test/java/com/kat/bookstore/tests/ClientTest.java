@@ -9,18 +9,20 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
-import com.kat.bookstore.domain.*;
+import com.kat.bookstore.domain.Book;
+import com.kat.bookstore.domain.BookGenre;
+import com.kat.bookstore.domain.Client;
+import com.kat.bookstore.domain.PriceBelowZeroException;
+
 
 public class ClientTest {
 
-	Client client1 = new Client("Jakub", "Pierzchala");
-	
+	Client c1 = new Client("Jan Kurek");
+
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		
 	}
 
 	@AfterClass
@@ -28,120 +30,101 @@ public class ClientTest {
 	}
 
 	@Before
-	public void setUp() throws Exception {	
-		client1.addBook("Polowanie", "Margit Sandemo", BookGenre.Fantasy, 1988, 19);
+	public void setUp() throws Exception {
+		c1.addBook("Pokolenie", "Jerzy Potok", BookGenre.Drama, 20);
 	}
 
 	@After
 	public void tearDown() throws Exception {
+		c1.deleteAllBooks();
 	}
 
 	@Test
 	public void testClient() throws PriceBelowZeroException {
-		Client client2 = new Client("Jerzy","Potok");
-		client2.addBook("Zgrzyt","Adam Wrzos", BookGenre.Horror, 2000, 15);
-		assertSame(client2.getBookList().size(), 1);
-		assertEquals(client2.getName(),("Jerzy"));
-		assertEquals(client2.getSurname(),("Potok"));
+		Client c2 = new Client("Piotr Glinko");
+		c2.addBook("Ukojenie", "Maria Peszek", BookGenre.Drama, 15);
+		assertTrue(c2.getBooklist().size() == 1);
+		assertTrue(c2.getName().equals("Piotr Glinko"));
 	}
 
 	@Test
 	public void testAddBook() throws PriceBelowZeroException {
-		
-		assertTrue(client1.getBookList().size() == 1);
+		assertTrue(c1.getBooklist().size() == 1);
 	}
 
-	@Test
-	public void testGetName() {
-		assertEquals(client1.getName(),"Jakub");
-	}
-
-	@Test
-	public void testSetName() {
-		client1.setName("Karol");
-		assertEquals(client1.getName(), "Karol");
-	}
-	
-	@Test
-	public void testGetSurname() {
-		assertEquals(client1.getSurname(),"Potok");
-	}
-
-	@Test
-	public void testSetSurname() {
-		client1.setSurname("Kubek");
-		assertEquals(client1.getSurname(), "Kubek");
-	}
-
-	@Test
-	public void testGetBookList() {
-		assertNotNull(client1.getBookList().size());
-	}
-
-	@Test
-	public void testSetBookList() {
-		List<Book> booklist = new ArrayList<Book>();
-		booklist.add(new Book("Granica", "Zofia Nalkowska", BookGenre.Drama, 1985, 20));
-		client1.setBookList(booklist);
-		assertTrue(booklist.size()==1);
-	}
-	
 	@Test
 	public void testDeleteBook() throws PriceBelowZeroException {
-		client1.deleteBook(client1.findBooksTitle("Polowanie"));
-		assertTrue(client1.getBookList().size() == 0);
+		c1.deleteBook(c1.findAllBooksByTitle("Pokolenie"));
+		assertTrue(c1.getBooklist().size() == 0);
 	}
 
 	@Test
-	public void testDeleteBookList() throws PriceBelowZeroException {
-		client1.addBook("Zdrada", "Janusz Zieba", BookGenre.Mistery, 1960, 12);
-		client1.addBook("Ukojenie", "Maria Wrona", BookGenre.Romance, 1970, 14);
-		client1.deleteBookList();
-		assertTrue(client1.getBookList().size() == 0);
+	public void testDeleteAllBooks() throws PriceBelowZeroException {
+		c1.addBook("Ukojenie", "Maria Peszek", BookGenre.Drama, 15);
+		c1.addBook("Zgroza", "Andrzej Krupa", BookGenre.Horror, 25);
+		c1.deleteAllBooks();
+		assertTrue(c1.getBooklist().size() == 0);
 	}
 
 	@Test
 	public void testEditBookPrice() throws PriceBelowZeroException {
-		client1.addBook("Pusty dom","Piotr Turek", BookGenre.Horror, 2001, 22);
-		client1.editBookPrice(client1.findBooksYear(2001),18);
-		assertTrue(client1.getBookList().get(0).getPrice() == 18);
-		assertTrue(client1.getBookList().get(1).getPrice() == 18);
-		assertSame(29, client1.getBookList().get(0).getPrice());
-		assertSame(29, client1.getBookList().get(1).getPrice());
-	}
-
-	@Test
-	public void testEditBookYear() throws PriceBelowZeroException {
-		client1.editBookYear(client1.findBooksTitle("Polowanie"), 1988);
-		assertTrue(client1.getBookList().get(0).getYear() == 1988);
+		c1.addBook("Ukojenie", "Maria Peszek", BookGenre.Drama, 15);
+		c1.editBookPrice(c1.findAllBooksByGenre(BookGenre.Drama),12);
+		assertTrue(c1.getBooklist().get(0).getPrice() == 12);
+		assertTrue(c1.getBooklist().get(1).getPrice() == 12);
+		assertSame(12, c1.getBooklist().get(0).getPrice());
+		assertSame(12, c1.getBooklist().get(1).getPrice());
 	}
 
 	@Test
 	public void testEditBookGenre() throws PriceBelowZeroException {
-		client1.editBookGenre(client1.findBooksTitle("Polowanie"), BookGenre.Fantasy);
-		assertTrue(client1.getBookList().get(0).getGenre() == BookGenre.Fantasy);
+		c1.editBookGenre(c1.findAllBooksByTitle("Pokolenie"), BookGenre.Mistery);
+		assertTrue(c1.getBooklist().get(0).getGenre() == BookGenre.Mistery);
 	}
 
 	@Test
-	public void testFindAllBookByName() throws PriceBelowZeroException {
-		client1.addBook("Utrapienie","Marek Krupa", BookGenre.Drama, 2001, 14);
-		assertEquals(client1.getBookList().get(0), client1.findBooksTitle("Polowanie").get(0));
-		assertSame(client1.getBookList().get(1), client1.findBooksTitle("Utrapienie").get(0));
-		assertNotNull(client1.getBookList().get(1));
+	public void testFindAllBookByTitle() throws PriceBelowZeroException {
+		c1.addBook("Ukojenie", "Maria Peszek", BookGenre.Drama, 15);
+		assertEquals(c1.getBooklist().get(0), c1.findAllBooksByTitle("Pokolenie").get(0));
+		assertSame(c1.getBooklist().get(1), c1.findAllBooksByTitle("Ukojenie").get(0));
+		assertNotNull(c1.getBooklist().get(1));
 	}
 
 	@Test
-	public void testFindAllBookByType() throws PriceBelowZeroException {
-		client1.addBook("Utrapienie","Marek Krupa", BookGenre.Drama, 2001, 14);
-		assertEquals(client1.getBookList().get(0), client1.findBooksGenre(BookGenre.Fantasy).get(0));
-		assertSame(client1.getBookList().get(1), client1.findBooksGenre(BookGenre.Drama).get(1));
+	public void testFindAllBooksByGenre() throws PriceBelowZeroException {
+		c1.addBook("Ukojenie", "Maria Peszek", BookGenre.Drama, 15);
+		assertEquals(c1.getBooklist().get(0), c1.findAllBooksByGenre(BookGenre.Drama).get(0));
+		assertSame(c1.getBooklist().get(1), c1.findAllBooksByGenre(BookGenre.Drama).get(1));
+	}
+	
+	@Test
+	public void testGetName() {
+		assertTrue(c1.getName() == "Jan Kurek");
 	}
 
 	@Test
-	public void testFindAllBookByYear() throws PriceBelowZeroException {
-		client1.addBook("Utrapienie","Marek Krupa", BookGenre.Drama, 1988, 14);
-		client1.addBook("Katharzis","Andrzej Rolka", BookGenre.Drama, 1988, 10);
-		assertEquals(client1.getBookList().get(0), client1.findBooksYear(1988).get(0));
-		assertSame(client1.getBookList().get(2), client1.findBooksYear(1988).get(2));
+	public void testSetName() {
+		c1.setName("Piotr Glinko");
+		assertTrue(c1.getName() == "Piotr Glinko");
 	}
+
+	@Test
+	public void testGetBooklist() throws PriceBelowZeroException {
+		assertNotNull(c1.getBooklist());
+		
+	}
+	
+	@Test
+	public void testSetBooklist() {
+		List<Book> list = new ArrayList<Book>();
+		list.add(new Book("Ukojenie", "Maria Peszek", BookGenre.Drama, 15));
+		c1.setBooklist(list);
+		assertTrue(list.size()==1);
+	}
+
+	@Test(expected = PriceBelowZeroException.class, timeout = 100)
+	public void testPriceBelowZeroException() throws PriceBelowZeroException {
+		c1.addBook("Ukojenie", "Maria Peszek", BookGenre.Drama, -15);
+	}
+
 }

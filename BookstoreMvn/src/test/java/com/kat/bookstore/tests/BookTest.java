@@ -2,13 +2,20 @@ package com.kat.bookstore.tests;
 
 import static org.junit.Assert.*;
 
-import org.junit.*;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-import com.kat.bookstore.domain.*;
+import com.kat.bookstore.domain.BookGenre;
+import com.kat.bookstore.domain.Client;
+import com.kat.bookstore.domain.PriceBelowZeroException;
+
 
 public class BookTest {
-
-	Client client1 = new Client("Jakub", "Pierzchala");
+	
+	Client c1 = new Client("Jan Kurek");
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -20,8 +27,7 @@ public class BookTest {
 
 	@Before
 	public void setUp() throws Exception {
-		client1.addBook("Polowanie", "Margit Sandemo", BookGenre.Fantasy, 1988, 19);
-		
+		c1.addBook("Pokolenie", "", BookGenre.Drama, 20);
 	}
 
 	@After
@@ -30,61 +36,62 @@ public class BookTest {
 
 	@Test
 	public void testBook() throws PriceBelowZeroException {
-		assertTrue(client1.getBookList().size()>0);
+		assertTrue(c1.getBooklist().size()>0);
 	}
 
 	@Test
 	public void testGetTitle() throws PriceBelowZeroException {
-		assertSame(client1.getBookList().get(0).getTitle(),"Polowanie");
+		assertTrue(c1.getBooklist().get(0).getTitle().equals("Pokolenie"));
 	}
 
 	@Test
 	public void testSetTitle() throws PriceBelowZeroException {
-		client1.getBookList().get(0).setTitle("Polowanie na czarownice");
-		assertSame(client1.getBookList().get(0).getTitle(),"Polowanie na czarownice");
+		c1.getBooklist().get(0).setTitle("Ukojenie");
+		assertTrue(c1.getBooklist().get(0).getTitle().equals("Ukojenie"));
 	}
 
 	@Test
 	public void testGetGenre() throws PriceBelowZeroException {
-		assertTrue(client1.getBookList().get(0).getGenre().equals(BookGenre.Fantasy));
+		assertTrue(c1.getBooklist().get(0).getGenre().equals(BookGenre.Drama));
 	}
 
 	@Test
 	public void testSetGenre() throws PriceBelowZeroException {
-		client1.getBookList().get(0).setGenre(BookGenre.Romance);
-		assertTrue(client1.getBookList().get(0).getGenre().equals(BookGenre.Romance));
-	}
-
-	@Test
-	public void testGetYear() throws PriceBelowZeroException {
-		assertTrue(client1.getBookList().get(0).getYear()==1988);
-	}
-
-	@Test
-	public void testSetReleaseYear() throws PriceBelowZeroException {
-		client1.getBookList().get(0).setYear(1990);
-		assertTrue(client1.getBookList().get(0).getYear()==1990);
+		c1.getBooklist().get(0).setGenre(BookGenre.Romance);
+		assertTrue(c1.getBooklist().get(0).getGenre().equals(BookGenre.Romance));
 	}
 
 	@Test
 	public void testGetPrice() throws PriceBelowZeroException {
-		assertTrue(client1.getBookList().get(0).getPrice()==19);
+		assertTrue(c1.getBooklist().get(0).getPrice()==20);
 	}
 
 	@Test
 	public void testSetPrice() throws PriceBelowZeroException {
-		client1.getBookList().get(0).setPrice(9);
-		assertTrue(client1.getBookList().get(0).getPrice()==9);
+		c1.getBooklist().get(0).setPrice(10);
+		assertTrue(c1.getBooklist().get(0).getPrice()==10);
 	}
 
 	@Test
-	public void testIsCleanShelf() throws PriceBelowZeroException {
-		assertTrue(client1.getBookList().get(0).isCleanShelf()==false);
+	public void testIsOnShelf() throws PriceBelowZeroException {
+		assertTrue(c1.getBooklist().get(0).isOnShelf()==true);
 	}
 
 	@Test
-	public void testSetCleanShelf() throws PriceBelowZeroException {
-		client1.getBookList().get(0).setCleanShelf(true);
-		assertTrue(client1.getBookList().get(0).isCleanShelf()==true);
+	public void testSetOnShelf() throws PriceBelowZeroException {
+		c1.getBooklist().get(0).setOnShelf(false);
+		assertTrue(c1.getBooklist().get(0).isOnShelf()==false);
 	}
+
+	@Test
+	public void testOrdered() throws PriceBelowZeroException {
+		assertTrue(c1.getBooklist().get(0).isOrdered()==false);
+	}
+
+	@Test
+	public void testSetOrdered() throws PriceBelowZeroException {
+		c1.getBooklist().get(0).setOnShelf(true);
+		assertTrue(c1.getBooklist().get(0).isOnShelf()==true);
+	}
+
 }

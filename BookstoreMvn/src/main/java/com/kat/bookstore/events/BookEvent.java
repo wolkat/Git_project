@@ -18,4 +18,5 @@ public class BookEvent {
 		super();
 		_book = book;
 	}
+
 }
