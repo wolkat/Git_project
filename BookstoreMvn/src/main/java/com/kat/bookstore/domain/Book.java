@@ -5,14 +5,14 @@ public class Book {
 		public long id;
 		public String title;
 		public String author;
-		private double price;
+		private int price;
 		public int year;
 		public BookGenre genre;
 		public boolean cleanShelf;
 		
-		public Book(){}
+		//public Book(){}
 		
-		public Book(String title, String author, BookGenre genre, int year, double price)
+		public Book(String title, String author, BookGenre genre, int year, int price)
 		{
 			this.title= title;
 			this.author=author;
@@ -59,11 +59,11 @@ public class Book {
 			this.year = year;
 		}
 		
-		public Double getPrice() {
+		public int getPrice() {
 			return price;
 		}
 		
-		public void setPrice(double price) throws PriceBelowZeroException
+		public void setPrice(int price) throws PriceBelowZeroException
 		{
 			if (price <0)
 					throw new PriceBelowZeroException("cena nie moze byc ujemna");

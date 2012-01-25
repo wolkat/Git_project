@@ -1,6 +1,7 @@
 package com.kat.bookstore.tests;
 
 import static org.junit.Assert.*;
+
 import org.junit.*;
 
 import com.kat.bookstore.domain.*;
@@ -19,8 +20,8 @@ public class BookTest {
 
 	@Before
 	public void setUp() throws Exception {
-		Book b = new Book("Polowanie", "Margit Sandemo", BookGenre.Fantasy, 1988, 19.8);
-		client1.addBook(b);
+		client1.addBook("Polowanie", "Margit Sandemo", BookGenre.Fantasy, 1988, 19);
+		
 	}
 
 	@After
@@ -30,11 +31,6 @@ public class BookTest {
 	@Test
 	public void testBook() throws PriceBelowZeroException {
 		assertTrue(client1.getBookList().size()>0);
-	}
-
-	@Test
-	public void testPrintBook() {
-		fail("Not yet implemented");
 	}
 
 	@Test
@@ -49,16 +45,36 @@ public class BookTest {
 	}
 
 	@Test
-	@Ignore
-	public void testGetPrice() throws PriceBelowZeroException {
-		//assertEquals(client1.getBookList().get(1).getPrice(), 19.8);
+	public void testGetGenre() throws PriceBelowZeroException {
+		assertTrue(client1.getBookList().get(0).getGenre().equals(BookGenre.Fantasy));
 	}
 
 	@Test
-	@Ignore
+	public void testSetGenre() throws PriceBelowZeroException {
+		client1.getBookList().get(0).setGenre(BookGenre.Romance);
+		assertTrue(client1.getBookList().get(0).getGenre().equals(BookGenre.Romance));
+	}
+
+	@Test
+	public void testGetYear() throws PriceBelowZeroException {
+		assertTrue(client1.getBookList().get(0).getYear()==1988);
+	}
+
+	@Test
+	public void testSetReleaseYear() throws PriceBelowZeroException {
+		client1.getBookList().get(0).setYear(1990);
+		assertTrue(client1.getBookList().get(0).getYear()==1990);
+	}
+
+	@Test
+	public void testGetPrice() throws PriceBelowZeroException {
+		assertTrue(client1.getBookList().get(0).getPrice()==19);
+	}
+
+	@Test
 	public void testSetPrice() throws PriceBelowZeroException {
-		client1.getBookList().get(0).setPrice(20.0);
-		//assertEquals(client1.getBookList().get(0).getPrice(), 20.0);
+		client1.getBookList().get(0).setPrice(9);
+		assertTrue(client1.getBookList().get(0).getPrice()==9);
 	}
 
 	@Test
@@ -68,7 +84,7 @@ public class BookTest {
 
 	@Test
 	public void testSetCleanShelf() throws PriceBelowZeroException {
-		client1.getBookList().get(0).setCleanShelf(false);
-		assertTrue(client1.getBookList().get(0).isCleanShelf()==false);
+		client1.getBookList().get(0).setCleanShelf(true);
+		assertTrue(client1.getBookList().get(0).isCleanShelf()==true);
 	}
 }

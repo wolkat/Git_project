@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import com.kat.bookstore.domain.*;
 
-public class BooksBaseMgr {
+public class BooksDB {
 	
 	private Connection connect;
 	private Statement statement;
@@ -21,22 +21,21 @@ public class BooksBaseMgr {
 	private PreparedStatement deleteBookStmt;
 	private PreparedStatement deleteAllBooksStmt;
 	private PreparedStatement getAllBooksStmt;
-	private PreparedStatement getAllBooksIDStmt;
 	private PreparedStatement findBookByTitleStmt;
 	private PreparedStatement findBookByAuthorStmt;
 	List<Integer> IDList = new ArrayList<Integer>();
 	
 	
-	public BooksBaseMgr() {
+	public BooksDB() {
 	try {
 		connect = DriverManager.getConnection(url);
 		statement = connect.createStatement();
 
-		ResultSet rs = connect.getMetaData().getTables(null, null, null, null);
+		ResultSet set = connect.getMetaData().getTables(null, null, null, null);
 		boolean tableExists = false;
 		
-		while (rs.next()) {
-			if ("Book".equalsIgnoreCase(rs.getString("TABLE_NAME"))) {
+		while (set.next()) {
+			if ("Book".equalsIgnoreCase(set.getString("TABLE_NAME"))) {
 				tableExists = true;
 				break;
 			} 
@@ -51,7 +50,7 @@ public class BooksBaseMgr {
 		deleteBookStmt = connect.prepareStatement("DELETE FROM Book WHERE id = ?");
 		deleteAllBooksStmt = connect.prepareStatement("DELETE FROM Book");
 		getAllBooksStmt = connect.prepareStatement("SELECT id, title, author FROM Book");
-		getAllBooksIDStmt = connect.prepareStatement("SELECT id from Book");
+		connect.prepareStatement("SELECT id from Book");
 	} catch (SQLException e) {
 		e.printStackTrace();
 		}
@@ -69,18 +68,21 @@ public class BooksBaseMgr {
 		}
 	}
 
-	public int addBook(Book b) {
-		int count = 0;
+	public void addBook(Book b) {
+		
 		try {
 			addBookStmt.setString(1, b.getTitle());
 			addBookStmt.setString(2, b.getAuthor());
+			addBookStmt.setString(3, b.getGenre().toString());
+			addBookStmt.setInt(4, b.getYear());
+			addBookStmt.setInt(5, b.getPrice());
 
-			count = addBookStmt.executeUpdate();
+			addBookStmt.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return count;
+		
 	}
 	
 
@@ -88,14 +90,17 @@ public class BooksBaseMgr {
 		List<Book> booklist = new ArrayList<Book>();
 
 		try {
-			ResultSet rs = getAllBooksStmt.executeQuery();
+			ResultSet set = getAllBooksStmt.executeQuery();
 
-			while (rs.next()) {
-				Book b = new Book();
-				b.setId(rs.getInt("id"));
-				b.setTitle(rs.getString("title"));
-				b.setAuthor(rs.getString("author"));
-				booklist.add(b);
+			while (set.next()) {
+				BookGenre genre = null;
+				if (set.getString("genre").equals("Horror")) genre= BookGenre.Horror;
+				if (set.getString("genre").equals("Romance")) genre= BookGenre.Romance;
+				if (set.getString("genre").equals("Fantasy")) genre= BookGenre.Fantasy;
+				if (set.getString("genre").equals("Mistery")) genre= BookGenre.Mistery;
+				if (set.getString("genre").equals("Drama")) genre= BookGenre.Drama;
+				
+				booklist.add(new Book(set.getString("title"),set.getString("author"),genre,set.getInt("year"),set.getInt("price")));
 			}
 
 		} catch (SQLException e) {
@@ -112,26 +117,14 @@ public class BooksBaseMgr {
 		}
 	}
 
-	public List<Integer> getAllBooksID() {
-		List<Integer> bookList = new ArrayList<Integer>();
-		
-		try {
-			ResultSet rs = getAllBooksIDStmt.executeQuery();
-			while (rs.next())
-				bookList.add(rs.getInt("ID"));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return bookList;
-	}
 	
 	public List<Integer> findBookByTitle(String title) {
 		try {
 			List<Integer> bookList = new ArrayList<Integer>();
 			findBookByTitleStmt.setString(1, title);
-			ResultSet rs = findBookByTitleStmt.executeQuery();
-			while (rs.next())
-				bookList.add(rs.getInt("ID"));
+			ResultSet set = findBookByTitleStmt.executeQuery();
+			while (set.next())
+				bookList.add(set.getInt("ID"));
 			return bookList;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -143,9 +136,9 @@ public class BooksBaseMgr {
 		try {
 			List<Integer> result = new ArrayList<Integer>();
 			findBookByAuthorStmt.setString(1, author);
-			ResultSet rs = findBookByAuthorStmt.executeQuery();
-			while (rs.next())
-				result.add(rs.getInt("ID"));
+			ResultSet set = findBookByAuthorStmt.executeQuery();
+			while (set.next())
+				result.add(set.getInt("ID"));
 			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -163,14 +156,13 @@ public class BooksBaseMgr {
 			e.printStackTrace();
 		}
 	}
-/*
-	// klasa anonimowa
+
 	public void printBookWithCondition(List<Book> BookList, Condition condition) {
 		for (Book book : BookList) {
 			if (condition.getCondition(book)) {
-				System.out.println("Name: " + book.getName() + "\nAuthor: "
+				System.out.println("Title: " + book.getTitle() + "\nAuthor: "
 						+ book.getAuthor());
 			}
 		}
-	}*/
+	}
 }

@@ -1,5 +1,6 @@
 package com.kat.bookstore.service;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -8,10 +9,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
+
 
 import com.kat.bookstore.domain.*;
 
-public class ClientBaseMgr {
+public class ClientDB {
 	
 	private Connection connect;
 	private Statement statement;
@@ -22,23 +25,23 @@ public class ClientBaseMgr {
 	private PreparedStatement addClientStmt;
 	private PreparedStatement deleteAllClientsStmt;
 	private PreparedStatement getAllClientsStmt;
-	private PreparedStatement getAllClientsIDstmt;
-	private PreparedStatement getClientStmt;
-	private PreparedStatement deleteClientListStmt;
+	private PreparedStatement deleteClientStmt;
 	private PreparedStatement findClientByNameStmt;
 	private PreparedStatement findClientBySurnameStmt;
 	List<Integer> listID = new ArrayList<Integer>();
 	
-	public ClientBaseMgr() {
-	try {
+	public ClientDB() {
+		try 
+		{
+			
 		connect = DriverManager.getConnection(url);
 		statement = connect.createStatement();
 
-		ResultSet rs = connect.getMetaData().getTables(null, null, null, null);
+		ResultSet set = connect.getMetaData().getTables(null, null, null, null);
 		boolean tableExists = false;
 		
-		while (rs.next()) {
-			if ("Client".equalsIgnoreCase(rs.getString("TABLE_NAME"))) {
+		while (set.next()) {
+			if ("Client".equalsIgnoreCase(set.getString("TABLE_NAME"))) {
 				tableExists = true;
 				break;
 			} 
@@ -48,13 +51,12 @@ public class ClientBaseMgr {
 		if (!tableExists) statement.executeUpdate(createTableClient);
 
 		addClientStmt = connect.prepareStatement("INSERT INTO Client (name, surname) VALUES (?, ?)");
-		deleteClientListStmt = connect.prepareStatement("DELETE FROM Client WHERE id = ?");
+		deleteClientStmt = connect.prepareStatement("DELETE FROM Client WHERE id = ?");
 		deleteAllClientsStmt = connect.prepareStatement("DELETE FROM Client");
-		getClientStmt = connect.prepareStatement("SELECT * FROM Client WHERE id = ?");
+		connect.prepareStatement("SELECT * FROM Client WHERE id = ?");
 		getAllClientsStmt = connect.prepareStatement("SELECT * FROM Client");
 		findClientByNameStmt = connect.prepareStatement("SELECT id FROM Client WHERE name = ?");
 		findClientBySurnameStmt = connect.prepareStatement("SELECT id FROM Client WHERE surname = ?");
-		getAllClientsIDstmt = connect.prepareStatement("SELECT id FROM Client");
 		
 		} catch (SQLException e) {
 		e.printStackTrace();
@@ -66,60 +68,28 @@ public class ClientBaseMgr {
 		return connect;
 	}
 
-	public int addClient(Client c) {
-		int count = 0;
+
+	public void addClient(Client c) {
+		
 		try {
 			addClientStmt.setString(1, c.getName());
 			addClientStmt.setString(2, c.getSurname());
-
-			count = addClientStmt.executeUpdate();
+			addClientStmt.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return count;
-	}
-	
-	public void getClient() {
 		
-		try {
-			ResultSet rs = getClientStmt.executeQuery();
-			
-			Client c = new Client();
-			c.setId(rs.getInt("id"));
-			c.setName(rs.getString("name"));
-			c.setSurname(rs.getString("surname"));
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	};
-
-	public List<Integer> getAllClientsID() {
-		List<Integer> clientList = new ArrayList<Integer>();
-		try {
-			ResultSet rs = getAllClientsIDstmt.executeQuery();
-			while (rs.next())
-				clientList.add(rs.getInt("id"));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		return clientList;
-	}
+	}	
 	
 	public List<Client> getAllClients() {
 		List<Client> clients = new ArrayList<Client>();
 
 		try {
-			ResultSet rs = getAllClientsStmt.executeQuery();
+			ResultSet set = getAllClientsStmt.executeQuery();
 
-			while (rs.next()) {
-				Client c = new Client();
-				c.setId(rs.getInt("id"));
-				c.setName(rs.getString("name"));
-				c.setSurname(rs.getString("surname"));
-				clients.add(c);
+			while (set.next()) {
+				clients.add(new Client(set.getString("name"),set.getString("surname")));
 			}
 
 		} catch (SQLException e) {
@@ -129,16 +99,21 @@ public class ClientBaseMgr {
 	}
 	
 	
-	public void deleteClientsList(List<Integer> list) {
-		try {
-			for (Integer id : list) {
-				deleteClientListStmt.setInt(1, id);
-				deleteClientListStmt.executeUpdate();
+	public void deleteClient(List<Integer> list)
+	{
+		try 
+		{
+			for (Integer id : list)
+			{
+				deleteClientStmt.setInt(1, id);
+				deleteClientStmt.executeUpdate();
 			}
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) 
+		{
 			e.printStackTrace();
 		}
-	} 
+	}
 	
 	public void deleteAllClients() {
 		try {
@@ -152,9 +127,9 @@ public class ClientBaseMgr {
 		try {
 			List<Integer> result = new ArrayList<Integer>();
 			findClientByNameStmt.setString(1, name);
-			ResultSet rs = findClientByNameStmt.executeQuery();
-			while (rs.next())
-				result.add(rs.getInt("ID"));
+			ResultSet set = findClientByNameStmt.executeQuery();
+			while (set.next())
+				result.add(set.getInt("ID"));
 			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -166,28 +141,15 @@ public class ClientBaseMgr {
 		try {
 			List<Integer> result = new ArrayList<Integer>();
 			findClientBySurnameStmt.setString(1, surname);
-			ResultSet rs = findClientBySurnameStmt.executeQuery();
-			while (rs.next())
-				result.add(rs.getInt("ID"));
+			ResultSet set = findClientBySurnameStmt.executeQuery();
+			while (set.next())
+				result.add(set.getInt("ID"));
 			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-
 	
-/*
-	// klasa anonimowa
-	public void printCustomerWithCondition(List<Customer> CustomerList,
-			Condition condition) {
-		for (Customer customer : CustomerList) {
-			if (condition.getCondition(customer)) {
-				System.out.println("Name: " + customer.getName()
-						+ "\tSurname: " + customer.getSurname());
-			}
-		}
-	}
-	*/
 }
 

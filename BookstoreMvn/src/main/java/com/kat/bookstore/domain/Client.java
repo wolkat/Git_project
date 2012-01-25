@@ -15,7 +15,7 @@ public class Client {
 		
 	public List<Book> bookList = new ArrayList<Book>();
 	
-	public Client(){} 
+	//public Client(){} 
 	
 	public Client(String name, String surname)
 	{
@@ -25,7 +25,7 @@ public class Client {
 	}
 	
 	public void printClient() {
-		System.out.println(this.name + " " + this.surname);
+		System.out.println("------"+ this.name + " " + this.surname+"------");
 		logger.info("print client: " + this.name + " " + this.surname);
 	}
 
@@ -35,28 +35,23 @@ public class Client {
 		}
 		logger.info("print client's ("+this.name+" "+this.surname+") booklist " );
 	}
-	
-	public void printBookList(List<Book> tmpList) {
-		for (Book b : tmpList)
-			b.printBook();
-	}
 
-	public void addBook(Book b) {	
-		bookList.add(b);
-		logger.info("added book \"" +b.title +"\" to client "+ name + " " + surname);
-	}
-
-	public void deleteBook(Book b) {
-		bookList.remove(b);	
-		logger.info("removed book \"" + b.getTitle()+"\" from client "+ name + " " + surname);
+	public void addBook(String title, String author, BookGenre genre, int year,
+			int price) throws PriceBelowZeroException {
+		if (price > 0) {
+			bookList.add(new Book(title, author, genre, year, price));
+			logger.info("Book: " + title + " - added");
+		}
+		if (price <= 0)
+			throw new PriceBelowZeroException("Price cannot by less than 0");
 	}
 	
-	public void deleteBooks(List<Book> bookL) {
+	public void deleteBook(List<Book> bookL) {
 		
 		for (Book b : bookL) {
 		bookList.remove(b);	
 		}
-		logger.info("removed books from "+ this.name +" " + this.surname + "'s booklist" );
+		logger.info("removed from "+ this.name +" " + this.surname + "'s booklist" );
 	}
 		
 	public void deleteBookList() {
@@ -64,6 +59,46 @@ public class Client {
 		logger.info("cleared client's ("+name+" "+surname+") booklist");
 	}
 
+	public void editBookPrice(List<Book> list, int price) throws PriceBelowZeroException {
+		if (price > 0) {
+			for (Book b : list) {
+				b.setPrice(price);
+				logger.info("Prize edit in " + b.getTitle() + ", new price: "
+						+ price);
+			}
+		}
+		if (price <= 0)
+			throw new PriceBelowZeroException("Price cannot by less than 0");
+	}
+	
+	public void editBookYear(List<Book> list, int year) {
+		for (Book b : list) {
+			b.setYear(year);
+			logger.info("Release year edit in " + b.getTitle()
+					+ ", new release year: " + year);
+		}
+	}
+	
+	public void editBookGenre(List<Book> list, BookGenre genre) {
+		for (Book b : list) {
+			b.setGenre(genre);
+			logger.info("Game type edit in " + b.getTitle()
+					+ ", new game type: " + genre);
+		}
+	}
+	
+
+	public List<Book> findBooksTitle(String title) {
+		List<Book> results= new ArrayList<Book>();
+		for (Book b : bookList) {
+			if (b.getTitle().equals(title)) {
+				results.add(b);
+			}
+			logger.info("found all books with title \"" + title + "\""  );
+		}
+		return results;
+	}
+	
 	public List<Book> findBooksGenre(BookGenre genre) {
 		List<Book> results= new ArrayList<Book>();
 		for (Book b : bookList) {
@@ -86,28 +121,17 @@ public class Client {
 		return results;
 	}
 	
-	public List<Book> findBooksTitle(String title) {
-		List<Book> results= new ArrayList<Book>();
+	public List<Book> findBooksYear(int year) {
+		List<Book> results = new ArrayList<Book>();
 		for (Book b : bookList) {
-			if (b.getTitle().equals(title)) {
-				results.add(b);
+			if (b.getYear()==year) {
+				results.add(b);	
 			}
-			logger.info("found all books with title \"" + title + "\""  );
+			logger.info("found books by " + year );
 		}
 		return results;
 	}
 	
-	public void removeAllBooksByList(List<Book> tempBookList) {
-		for (Book b : bookList) {
-			for (Book tempB : tempBookList) {
-				if (b.equals(tempB)) {
-					bookList.remove(b);
-				}
-			}
-		logger.info("removed all books from list \"" + tempBookList + "\""  );
-		}
-	}
-
 	@Size(min = 2, max = 20)
 	public String getName() {
 		return name;
