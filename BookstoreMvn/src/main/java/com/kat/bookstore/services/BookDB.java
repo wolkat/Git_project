@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.*;
 
+import javax.enterprise.context.ApplicationScoped;
+
 import com.kat.bookstore.domain.*;
 
-
+@ApplicationScoped
 public class BookDB {
 
 	private Connection connect;

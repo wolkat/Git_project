@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/default.xhtml">
+	<ui:define name="content">
+
+		<h:form id="bookForm">
+            
+			<h:panelGrid columns="2">
+
+				<h:outputText value="#{msg.bookTitleLabel}" />
+				<h:inputText id="name" value="#{bookBean.book.title}" required="#{true}">
+ 					<f:validator validatorId="titleValidator" /> 
+				</h:inputText>
+
+				<h:outputText value="#{msg.bookBookGenreLabel}" />
+				<h:selectOneMenu id="bookGenre" value="#{bookBean.book.bookGenre}">
+				  <f:selectItem id="Drama" itemLabel="Drama" itemValue="Drama" />
+				  <f:selectItem id="Fantasy" itemLabel="Fantasy" itemValue="Fantasy" />
+				  <f:selectItem id="Horror" itemLabel="Horror" itemValue="Horror" />
+				  <f:selectItem id="Mistery" itemLabel="Mistery" itemValue="Mistery" />
+				  <f:selectItem id="Romance" itemLabel="Romance" itemValue="Romance" />
+				</h:selectOneMenu>
+
+				<h:outputText value="#{msg.bookPriceLabel}" />
+				<h:inputText id="price" value="#{bookBean.book.price}" required="#{true}" />
+
+
+
+			</h:panelGrid>
+
+			<h:commandButton value="#{msg.bookFormOKButton}"
+				action="#{bookBean.addBook}" />
+
+
+			<h:panelGrid>
+				<h:messages id="messages" showDetail="#{true}"
+					showSummary="#{false}" />
+			</h:panelGrid>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

@@ -1,8 +1,8 @@
 package com.kat.bookstore.domain;
 
 import org.apache.log4j.*;
+import java.text.SimpleDateFormat;
 
-import com.kat.bookstore.events.*;
 import com.kat.bookstore.services.Condition;
 import com.kat.bookstore.services.BookDB;
 import com.kat.bookstore.services.ClientDB;
@@ -18,8 +18,8 @@ public class Main {
 
 		PropertyConfigurator.configure("Log4J.properties");
 
-		Client c1 = new Client("Jan Kurek");
-		Client c2 = new Client("Piotr Glinko");
+		Client c1 = new Client("Jan Kurek",null);
+		Client c2 = new Client("Piotr Glinko", null);
 		try {
 			c1.addBook("Pokolenie", "Jerzy Potok", BookGenre.Drama, 20);
 			c1.addBook("Ukojenie", "Maria Peszek", BookGenre.Drama, 15);
@@ -43,24 +43,6 @@ public class Main {
 
 		c2.printAll();
 
-		Manager mgr = new Manager();
-
-		IBookProcesses emptyShelf = new EmptyShelf();
-		IBookProcesses order = new OrderBook();
-
-		System.out.println("== Book Events ==");
-		c1.findAllBooksByTitle("Pokolenie").get(0).setOnShelf(false);
-		System.out.println("Pokolenie empty shelf before - "
-				+ c1.findAllBooksByTitle("Pokolenie").get(0).isOnShelf());
-		System.out.println("Pokolenie order book before - "
-				+ c1.findAllBooksByTitle("Pokolenie").get(0).isOrdered());
-		mgr.addProcess(emptyShelf);
-		mgr.addProcess(order);
-		mgr.executeProcesses(c1.findAllBooksByGenre(BookGenre.Drama));
-		System.out.println("Pokolenie empty shelf after - "
-				+ c1.findAllBooksByTitle("Pokolenie").get(0).isOnShelf());
-		System.out.println("Pokolenie order book after - "
-				+ c1.findAllBooksByTitle("Pokolenie").get(0).isOrdered());
 		
 		System.out.println("\n\n=============================");
 		

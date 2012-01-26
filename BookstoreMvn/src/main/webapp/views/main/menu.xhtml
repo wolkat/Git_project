@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+  <div>
+	<h:form>
+	  <ul>
+		<li>
+		  <h:commandLink action="home?faces-redirect=true">
+			<h:outputText value="#{msg.linkHome}" />
+		  </h:commandLink>
+		</li>
+		<li>
+		  <h:commandLink action="addClient?faces-redirect=true">
+			<h:outputText value="#{msg.clientAddLabel}" />
+		  </h:commandLink>
+		</li>
+		<li>
+		  <h:commandLink action="addBook?faces-redirect=true">
+			<h:outputText value="#{msg.bookAddLabel}" />
+		  </h:commandLink>
+		</li>
+		<li>
+		  <h:commandLink action="showClients?faces-redirect=true">
+			 <h:outputText value="#{msg.clientAllLabel}" />
+		  </h:commandLink>
+		</li>
+		<li>
+		  <h:commandLink action="showBooks?faces-redirect=true">
+			 <h:outputText value="#{msg.bookAllLabel}" />
+		  </h:commandLink>
+		</li>
+<!-- 
+		<li>
+		  <h:commandLink action="addBookToClient?faces-redirect=true">
+			 <h:outputText value="#{msg.bookToClientLabel}" />
+		  </h:commandLink>
+		</li>
+		<li>
+		  <h:commandLink action="showBookClient?faces-redirect=true">
+			 <h:outputText value="#{msg.bookClientLabel}" />
+		  </h:commandLink>
+		</li>
+-->
+	</ul>
+   </h:form>
+  </div>
+</ui:composition>

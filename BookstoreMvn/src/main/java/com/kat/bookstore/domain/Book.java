@@ -1,5 +1,6 @@
 package com.kat.bookstore.domain;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 public class Book {
 
@@ -27,6 +28,7 @@ public class Book {
 				"\tGenre: " + genre	+ "\tPrice: " + price);
 	}
 
+	@Min(1)
 	public String getTitle() {
 		return title;
 	}
@@ -35,6 +37,7 @@ public class Book {
 		this.title = title;
 	}
 	
+	@Min(1)
 	public String getAuthor() {
 		return author;
 	}
@@ -51,7 +54,7 @@ public class Book {
 		this.genre = genre;
 	}
 
-	@Min(0)
+	@NotNull
 	public int getPrice() {
 		return price;
 	}
@@ -75,4 +78,5 @@ public class Book {
 	public void setOrdered(boolean ordered) {
 		this.ordered = ordered;
 	}
+
 }

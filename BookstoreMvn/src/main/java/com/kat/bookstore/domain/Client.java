@@ -1,18 +1,26 @@
 package com.kat.bookstore.domain;
 
 import java.util.*;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
+
 import org.apache.log4j.*;
 
 public class Client {
 
 	private static Logger logger = Logger.getLogger(Client.class);
 
-	String name;
+	String name = "unknown";
 	List<Book> booklist = new ArrayList<Book>();
+	Date dateOfBirth = new Date();
+	
 
-	public Client(String name) {
+	public Client(String name, Date dateOfBirth) {
 		super();
 		this.name = name;
+		this.dateOfBirth = dateOfBirth;
 		this.booklist = new ArrayList<Book>();
 	}
 
@@ -101,6 +109,7 @@ public class Client {
 		Client.logger = logger;
 	}
 
+	@Size(min=1, max=20)
 	public String getName() {
 		return name;
 	}
@@ -115,5 +124,14 @@ public class Client {
 
 	public void setBooklist(List<Book> booklist) {
 		this.booklist = booklist;
+	}
+
+	@Past
+	public Date getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
 	}
 }

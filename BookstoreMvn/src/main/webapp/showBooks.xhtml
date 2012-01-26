@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/default.xhtml">
+
+	<ui:define name="content">
+
+    <h:form>
+    
+     <h:dataTable value="#{bookBean.allBooks}" var="item">
+      
+      <h:column>
+        <f:facet name="header">#{msg.bookTitleLabel}</f:facet>
+        #{item.title}
+      </h:column>
+      
+      <h:column>
+        <f:facet name="header">#{msg.bookAuthorLabel}</f:facet>
+        #{item.author}
+      </h:column>
+      
+      <h:column>
+        <f:facet name="header">#{msg.bookBookGenreLabel}</f:facet>
+        #{item.bookGenre}
+      </h:column>
+      
+      <h:column>
+        <f:facet name="header">#{msg.bookPriceLabel}</f:facet>
+        #{item.price}
+      </h:column>
+      
+      <h:column>
+        <f:facet name="header">#{msg.action}</f:facet>
+        <h:commandLink value="#{msg.actionDelete}" action="#{bookBean.deleteBook}"/>
+      </h:column>
+
+      
+     </h:dataTable>
+    </h:form>
+      
+	</ui:define>
+
+</ui:composition>
