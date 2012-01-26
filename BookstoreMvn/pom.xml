@@ -3,9 +3,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.kat.bookstore</groupId>
-	<artifactId>BookstoreJSF</artifactId>
+	<artifactId>BookstoreMVN</artifactId>
 	<packaging>war</packaging>
-	<name>BookstoreJSF</name>
+	<name>BookstoreMVN</name>
 	<version>1.0.0-SNAPSHOT</version>
 	<url>http://maven.apache.org</url>
 
@@ -77,6 +77,12 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.16</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>2.2.4</version>
+		</dependency>
 
 		<!-- RichFaces stuff -->
 		<dependency>
@@ -91,7 +97,7 @@
 
 	</dependencies>
 	<build>
-		<finalName>BookstoreJSP</finalName>
+		<finalName>BookstoreMVN</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
