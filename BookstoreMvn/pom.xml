@@ -97,6 +97,11 @@
 
 	</dependencies>
 	<build>
+		<resources>
+			<resource>
+				<directory>src/resources/java</directory>
+			</resource>
+		</resources>
 		<finalName>BookstoreMVN</finalName>
 		<plugins>
 			<plugin>
@@ -115,6 +120,11 @@
 				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
+				<archive>
+								<manifest>
+									<mainClass>com.kat.bookstore.project.Main</mainClass>
+								</manifest>
+							</archive>
 			</plugin>
 		</plugins>
 	</build>

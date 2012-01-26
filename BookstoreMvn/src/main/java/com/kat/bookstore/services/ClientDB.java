@@ -28,7 +28,7 @@ public class ClientDB {
 			Properties props = new Properties();
 			
 			try {
-				props.load(ClassLoader.getSystemResourceAsStream("com/kat/bookstore/jdbs.properties"));
+				props.load(ClassLoader.getSystemResourceAsStream("jdbs.properties"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
