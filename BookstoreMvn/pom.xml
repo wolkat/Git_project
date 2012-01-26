@@ -122,7 +122,7 @@
 				</configuration>
 				<archive>
 								<manifest>
-									<mainClass>com.kat.bookstore.project.Main</mainClass>
+									<mainClass>com.kat.bookstore.domain.Main</mainClass>
 								</manifest>
 							</archive>
 			</plugin>
