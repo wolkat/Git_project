@@ -16,7 +16,7 @@ public class Main {
 
 	public static void main(String[] args) throws PriceBelowZeroException {
 
-		PropertyConfigurator.configure("src/resources/java/Log4J.properties");
+		PropertyConfigurator.configure("Log4J.properties");
 
 		Client c1 = new Client("Jan Kurek");
 		Client c2 = new Client("Piotr Glinko");

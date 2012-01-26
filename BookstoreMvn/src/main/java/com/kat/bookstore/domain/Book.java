@@ -1,4 +1,5 @@
 package com.kat.bookstore.domain;
+import javax.validation.constraints.Min;
 
 public class Book {
 
@@ -50,6 +51,7 @@ public class Book {
 		this.genre = genre;
 	}
 
+	@Min(0)
 	public int getPrice() {
 		return price;
 	}
